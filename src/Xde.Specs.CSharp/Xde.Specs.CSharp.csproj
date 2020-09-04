@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile>c:\Projects\xde-app\src\Xde.Specs\Xde.Specs.xml</DocumentationFile>
+		<DocumentationFile>.\Xde.Specs.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
