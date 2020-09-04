@@ -1,12 +1,4 @@
 ﻿using System;
+using System.Reflection;
 
-namespace Xde.Specs
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            
-        }
-    }
-}
+Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
