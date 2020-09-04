@@ -6,6 +6,7 @@
 		<LangVersion>9.0</LangVersion>
 		<RootNamespace>Xde</RootNamespace>
 		<GenerateProgramFile>false</GenerateProgramFile>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
