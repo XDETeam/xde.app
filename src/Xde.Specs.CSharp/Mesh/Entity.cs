@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -55,6 +54,11 @@ namespace Xde.Mesh
         /// <inheritdoc />
         public override string ToString()
             => $"Object #{Id} <{string.Join(';', _aspects.Select(aspect => aspect.Key.Name))}>"
+        ;
+
+        public static Entity From<TAspect>(Action<TAspect> config = null)
+            where TAspect : new()
+            => Create().Set(config)
         ;
 
         public static Entity Create() => new Entity
