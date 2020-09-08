@@ -12,14 +12,14 @@ var signIn = Entity
 // сооответствующий тип, который выполнит роль абстракции, за которую будут цепляться
 // остальные обработчики.
 
-var securityRoute = Dispatcher
-    .When<Http>(http => http.Path.Token("/security"))
+var securityRoute = When
+    .Is<Http>(http => http.Path.Token("/security"))
     .Then<Route>((source, route) => route.Path = "/security") //TODO:Substring...
     //TODO:Redirect if not SSL
 ;
 
-var signInRoute = Dispatcher
-    .When<(Http http, Route route)>(aspects
+var signInRoute = When
+    .Is<(Http http, Route route)>(aspects
         => aspects.route.Path.Token("/security") && aspects.route.Path.Next("/sign-in")
     )
 ;
