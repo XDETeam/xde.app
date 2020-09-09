@@ -13,9 +13,17 @@ var signIn = Entity
 // остальные обработчики.
 
 var securityRoute = When
+    // TODO:Как эффективно диспетчеризовать без необходимость делать для каждого запроса
+    // проверку по нескольким (десятков) потенциальных роутов.
     .Is<Http>(http => http.Path.Token("/security"))
-    .Then<Route>((source, route) => route.Path = "/security") //TODO:Substring...
-    //TODO:Redirect if not SSL
+    .Then<Route>((from, to) => to.Path = "/security")
+    .Then<Http, TlsGuard>(http => http.IsTls)
+;
+
+var checkTls = When
+    .Is<(Http http, TlsGuard guard)>(aspects => !aspects.http.IsTls)
+    //.Then<Route>((from, to) => to.Path = from.route.Path)
+    .Then<Redirect>((from, to) => to.Path = $"https://{from.http.Path}")
 ;
 
 var signInRoute = When
@@ -29,6 +37,8 @@ Console.WriteLine(signIn);
 public class Http
 {
     public Parser Path { get; set; }
+
+    public bool IsTls { get; set; }
 }
 
 public class Route
@@ -38,4 +48,14 @@ public class Route
     // синтаксический разбор, а что осталось. Этот же парсер может быть использован для
     // JSON и т.п.
     public Parser Path { get; set; }
+}
+
+public class TlsGuard
+{
+
+}
+
+public class Redirect
+{
+    public string Path { get; set; }
 }
