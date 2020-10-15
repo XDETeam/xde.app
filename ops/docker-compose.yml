@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  postgres:
+    container_name: xde-app-db
+    image: postgres:13
+    restart: always
+    volumes:
+        - ./postgres/.data:/var/lib/postgresql/data
+    ports:
+        - 8132:5432
+    env_file:
+        - ./.env
+
+  controller:
+    container_name: xde-app-ctrl
+    build: ./controller
+    stdin_open: true
+    tty: true
+    command: /bin/bash
