@@ -1,2 +1,0 @@
-- Consider build process as a more important one. We are talking not about having an app, there can be a lot of transformations and produced artifcats.
-- Sample of the cargo build-scripts usage - http://lalrpop.github.io/lalrpop/tutorial/001_adding_lalrpop.html.

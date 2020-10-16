@@ -1,8 +1,0 @@
-[package]
-name = "xde-app-specs"
-version = "0.0.1"
-authors = ["stan <stanislav@yarmonov.pro>"]
-edition = "2018"
-publish = false
-
-[dependencies]
