@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xde.App.Android", "Xde.App\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xde.App.iOS", "Xde.App\Xde.App.iOS\Xde.App.iOS.csproj", "{1555B798-6738-4969-8987-17D207580377}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xde.App", "Xde.App\Xde.App\Xde.App.csproj", "{C0EF1607-0F45-4DA1-A0AB-1B9E2C2F074A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xde.App", "Xde.App\Xde.App\Xde.App.csproj", "{C0EF1607-0F45-4DA1-A0AB-1B9E2C2F074A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

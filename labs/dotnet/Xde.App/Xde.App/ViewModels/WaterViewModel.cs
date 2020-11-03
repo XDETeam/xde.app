@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Xde.App.ViewModels
@@ -9,12 +8,17 @@ namespace Xde.App.ViewModels
         public WaterViewModel()
         {
             Title = "Water";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
-        }
+			DrinkCommand = new Command(DrinkHandler);
+		}
+
+		private async void DrinkHandler()
+		{
+			await Application.Current.MainPage.DisplayAlert("Drink confirm", $"Drink {Volume}ml?", "Yes", "No");
+		}
 
 		public int Volume { get; set; } = DefaultAmount;
 
-        public ICommand OpenWebCommand { get; }
+        public ICommand DrinkCommand { get; }
 
 		public const int DefaultAmount = 300;
     }
