@@ -12,7 +12,7 @@ psql `
 	--username=postgres `
 	--dbname=xde `
 	--file=deploy.sql `
-	--host=localhost `
+	--host=192.168.1.2 `
 	--quiet `
 	--set ON_ERROR_STOP=on
 
