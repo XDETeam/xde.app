@@ -4,3 +4,4 @@
 \ir mess_drink_goals.sql
 
 \ir mess_gmg_done.sql
+\ir mess_gmg_done_days.sql
