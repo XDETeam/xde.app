@@ -18,3 +18,5 @@ VALUES
 '<root></root>'
 )
 ;
+
+select mesh.node_xslt_transform('//xde/labs/db-version', '//xde/default.xsl');
