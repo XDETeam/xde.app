@@ -9,7 +9,10 @@ CREATE TABLE mesh.node (
 			owner
 		) REFERENCES mesh.node (
 			id
-		)
+		),
+
+	path text NOT NULL, --TODO:Temporary column
+	content xml NOT NULL
 
 	-- TODO: This fields may be a part of lifetime aspect.
     -- created timestamp NOT NULL,
