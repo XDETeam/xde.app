@@ -7,7 +7,9 @@
 	DROP SEQUENCE IF EXISTS mesh.id_sequence CASCADE;
 	
 	DROP VIEW IF EXISTS mesh.mess_goals;
-	DROP VIEW IF EXISTS mesh.mess_deadline_list;            
+	DROP VIEW IF EXISTS mesh.mess_deadline_list;
+	DROP VIEW IF EXISTS mesh.mess_rank_list;
+	DROP VIEW IF EXISTS mesh.mess_depends_list;
 \endif
 
 \ir env/schema.sql

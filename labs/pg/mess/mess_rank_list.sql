@@ -7,7 +7,7 @@ AS SELECT
 FROM
 	mesh.mess,
 	LATERAL XMLTABLE(
-		'//rank'::text PASSING (mess.content) COLUMNS
+		('//rank'::text) PASSING (mess.content) COLUMNS
 		index integer PATH ('@index'::text),
 		title text PATH ('../@title'::text)
 	) rank

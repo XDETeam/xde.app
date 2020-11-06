@@ -7,7 +7,7 @@ AS SELECT
 FROM
 	mesh.mess,
 	LATERAL XMLTABLE(
-		'//deadline'::text PASSING (mess.content)
+		('//deadline'::text) PASSING (mess.content)
 		COLUMNS
 			at timestamp without time zone PATH ('@at'::text),
 			title text PATH ('../@title'::text)
