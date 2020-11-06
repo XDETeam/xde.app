@@ -10,6 +10,7 @@
 	DROP VIEW IF EXISTS mesh.mess_deadline_list;
 	DROP VIEW IF EXISTS mesh.mess_rank_list;
 	DROP VIEW IF EXISTS mesh.mess_depends_list;
+	DROP VIEW IF EXISTS mesh.mess_drink_goals;
 \endif
 
 \ir env/schema.sql
