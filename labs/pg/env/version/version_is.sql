@@ -13,7 +13,7 @@ CREATE OR REPLACE FUNCTION env.version_is(version integer)
 RETURNS boolean
 AS $$
 	SELECT
-		version.last_value = version_is.version
+		MAX(id) = version_is.version
 	FROM
 		env.version
 	;
