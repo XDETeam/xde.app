@@ -1,7 +1,3 @@
 SET CLIENT_MIN_MESSAGES TO WARNING;
 
-\ir env/schema.sql
-
-\ir clean.sql
-
-\ir mesh/schema.sql
+\ir 0.00.0001.sql
