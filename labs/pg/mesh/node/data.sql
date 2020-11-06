@@ -40,6 +40,3 @@ VALUES
 </node>'
 )
 ;
-
---TODO:0
-select mesh.node_xslt_transform('//xde/labs/db-version', 'screen');

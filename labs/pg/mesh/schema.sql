@@ -6,4 +6,5 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 
 \ir node/node.sql
 \ir node/node_xslt_transform.sql
+\ir node/node_web_publish.sql
 \ir node/data.sql
