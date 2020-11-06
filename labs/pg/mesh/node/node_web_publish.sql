@@ -1,22 +1,17 @@
-CREATE OR REPLACE FUNCTION mesh.node_web_publish()
-RETURNS TABLE (
-    path text,
-    content text
-)
-AS $$
-    WITH CTE AS (
-        SELECT
-               path,
-               mesh.node_xslt_transform(node.path, 'screen') AS output
-        FROM
-             mesh.node
-    )
+CREATE OR REPLACE VIEW mesh.node_web_publish
+AS
+WITH CTE AS (
     SELECT
-        path,
-        output
+           path,
+           mesh.node_xslt_transform(node.path, 'screen') AS content
     FROM
-        CTE
-    WHERE
-        output IS NOT NULL
-    ;
-$$ LANGUAGE SQL;
+         mesh.node
+)
+SELECT
+    path,
+    content
+FROM
+    CTE
+WHERE
+    content IS NOT NULL
+;

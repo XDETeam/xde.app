@@ -17,13 +17,19 @@ VALUES
                 <p>
                     <xsl:text>@rel: </xsl:text>
                     <xsl:value-of select="@rel"/>
-
+				</p>
+				
+				<p>
                     <xsl:text> @href: </xsl:text>
                     <xsl:value-of select="@href"/>
+				</p>
 
+				<p>
                     <xsl:text> @type: </xsl:text>
                     <xsl:value-of select="@type"/>
+				</p>
 
+				<p>
                     <xsl:text> @media: </xsl:text>
                     <xsl:value-of select="@media"/>
                 </p>
