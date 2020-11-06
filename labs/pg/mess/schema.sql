@@ -2,3 +2,5 @@
 \ir mess_depends_list.sql
 \ir mess_rank_list.sql
 \ir mess_drink_goals.sql
+
+\ir mess_gmg_done.sql
