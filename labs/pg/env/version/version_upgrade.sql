@@ -10,7 +10,9 @@ CREATE OR REPLACE PROCEDURE env.version_upgrade(version integer)
 AS $$
 	INSERT INTO env.version (
 		id
-	) VALUES (
+	) SELECT
 		version_upgrade.version
-	);
+	WHERE
+		env.version_less(version_upgrade.version)
+	;
 $$ LANGUAGE sql;
