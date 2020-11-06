@@ -6,3 +6,4 @@
 \ir mess_gmg_done.sql
 \ir mess_gmg_done_days.sql
 \ir mess_gmg_invoice.sql
+\ir mess_goals.sql
