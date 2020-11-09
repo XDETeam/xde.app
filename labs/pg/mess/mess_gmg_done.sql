@@ -10,11 +10,11 @@ FROM
 		at date PATH ('@at'::text),
 		"time" integer PATH ('@time'::text),
 		task text PATH ('text()'::text),
-	    paid date PATH ('../@paid'::text)
+	    issued date PATH ('../@issued'::text)
 	) done
 WHERE
 	mess.id = 'gmg.invoice'::ltree
-    AND done.paid IS NULL
+    AND done.issued IS NULL
 ORDER BY
 	done.at DESC
 ;
