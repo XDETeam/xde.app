@@ -15,7 +15,7 @@ UNION ALL SELECT
     (
 		((((100 * sum(mess_gmg_done_days.hours))::double precision / (((7000.00 / 40)::double precision * (t.current - t.start)) / (t.finish - t.start))))::integer)::text || '%'::text
 	) AS targets,
-	NULL::text AS notes,
+	sum(mess_gmg_done_days.hours)::decimal(6,2)::text || ' hours' AS notes,
     (SELECT content FROM mesh.mess WHERE id = 'gmg.invoice') AS content
 FROM
 	mesh.mess_gmg_done_days,
@@ -25,8 +25,6 @@ FROM
 			date_part('epoch'::text, date_trunc('month'::text, (CURRENT_DATE + '1 mon'::interval))) AS date_part,
 			date_part('epoch'::text, now()) AS current
     ) t(start, finish, current)
-WHERE
-	(mess_gmg_done_days.month = to_char((CURRENT_DATE)::timestamp with time zone, 'IYYY-MM'::text))
 GROUP BY
 	t.start,
 	t.finish,
