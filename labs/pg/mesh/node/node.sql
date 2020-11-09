@@ -18,3 +18,10 @@ CREATE TABLE mesh.node (
     -- created timestamp NOT NULL,
     -- deleted timestamp NULL
 ) WITHOUT OIDS;
+
+CREATE INDEX
+	ux_mesh_node_owner_path
+ON mesh.node (
+	owner,
+	path
+);
