@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace Xde
 {
@@ -10,7 +10,10 @@ namespace Xde
     /// <para>
     ///     Namespaces are organized depending on aspects:
     ///     
-    ///     <list type="bullet">
+	///		TODO:Another way of organization is using engineering fields as it is described
+	///		internally in the Mess.
+    ///     
+	///		<list type="bullet">
     ///         <item>
     ///             <see cref="Xde.Ownership.NamespaceDoc"/>
     ///         </item>
