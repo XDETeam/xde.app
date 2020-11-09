@@ -9,5 +9,5 @@ AS SELECT
 FROM
 	mesh.mess_gmg_done_days
 ORDER BY
-	(to_char(mess_gmg_done_days.date::timestamp with time zone, 'dd.MM.yyyy'::text))
+	mess_gmg_done_days.date
 ;
