@@ -5,7 +5,11 @@
 	
 	DROP DOMAIN IF EXISTS mesh.id CASCADE;
 	DROP SEQUENCE IF EXISTS mesh.id_sequence CASCADE;
+
+	DROP VIEW IF EXISTS mesh.mess_scheme_tags;
 	
+	DROP VIEW IF EXISTS mesh.mess_anki_list CASCADE;
+	DROP VIEW IF EXISTS mesh.mess_balance_list CASCADE;
 	DROP VIEW IF EXISTS mesh.mess_goals CASCADE;
 	DROP VIEW IF EXISTS mesh.mess_deadline_list;
 	DROP VIEW IF EXISTS mesh.mess_rank_list;

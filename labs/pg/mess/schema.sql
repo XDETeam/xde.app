@@ -1,3 +1,5 @@
+\ir mess_scheme_tags.sql
+
 \ir mess_anki_list.sql
 \ir mess_balance_list.sql
 \ir mess_deadline_list.sql
