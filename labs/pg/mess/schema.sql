@@ -15,3 +15,6 @@
 \ir mess_goals_on_update.sql
 
 \ir mess_xslt_match.sql
+
+\ir mess_dump_from.sql
+\ir mess_dump_to.sql
