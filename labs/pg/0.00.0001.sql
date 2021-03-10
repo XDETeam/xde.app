@@ -21,6 +21,9 @@
 	DROP VIEW IF EXISTS mesh.mess_gmg_done;
 \endif
 
+CREATE EXTENSION IF NOT EXISTS ltree;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
 \ir env/schema.sql
 \ir mesh/schema.sql
 \ir mess/schema.sql

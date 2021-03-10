@@ -1,3 +1,11 @@
+CREATE INDEX
+	mess_idx_content 
+ON
+	mesh.mess
+USING
+	GIN ((content::text) gin_trgm_ops)
+;
+
 \ir mess_scheme_tags.sql
 
 \ir mess_anki_list.sql
@@ -18,3 +26,5 @@
 
 \ir mess_dump_from.sql
 \ir mess_dump_to.sql
+
+\ir mess_fts.sql
