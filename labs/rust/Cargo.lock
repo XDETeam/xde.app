@@ -3,3 +3,7 @@
 [[package]]
 name = "sde-audio"
 version = "0.0.1"
+
+[[package]]
+name = "sde-security"
+version = "0.0.1"
