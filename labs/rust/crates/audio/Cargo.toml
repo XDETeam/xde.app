@@ -1,5 +1,5 @@
 [package]
-name = "sde-audio"
+name = "xde-audio"
 version = "0.0.1"
 authors = ["stan <stanislav@yarmonov.pro>"]
 edition = "2018"
