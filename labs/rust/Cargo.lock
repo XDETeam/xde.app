@@ -7,3 +7,7 @@ version = "0.0.1"
 [[package]]
 name = "sde-security"
 version = "0.0.1"
+
+[[package]]
+name = "sde-video"
+version = "0.0.1"
