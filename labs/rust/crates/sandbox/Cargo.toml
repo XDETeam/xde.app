@@ -1,0 +1,8 @@
+[package]
+name = "xde-sandbox"
+version = "0.0.1"
+authors = ["stan <stanislav@yarmonov.pro>"]
+edition = "2018"
+
+[dependencies]
+syn = "1.0.11"

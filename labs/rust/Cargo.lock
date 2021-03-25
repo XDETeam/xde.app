@@ -40,6 +40,39 @@ name = "xde-audio"
 version = "0.0.1"
 
 [[package]]
+name = "xde-cli"
+version = "0.0.1"
+
+[[package]]
+name = "xde-sandbox"
+version = "0.0.1"
+dependencies = [
+ "syn",
+]
+
+[[package]]
+name = "xde-sandbox-cli"
+version = "0.0.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+ "xde-sandbox-macro",
+ "xde-specs",
+ "xde-specs-macro",
+]
+
+[[package]]
+name = "xde-sandbox-macro"
+version = "0.0.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+ "xde-sandbox",
+]
+
+[[package]]
 name = "xde-security"
 version = "0.0.1"
 
