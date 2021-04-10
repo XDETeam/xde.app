@@ -1,4 +1,4 @@
-﻿namespace Xde.Mesh
+namespace Xde.Forms.Mesh
 {
     public class Parser
     {

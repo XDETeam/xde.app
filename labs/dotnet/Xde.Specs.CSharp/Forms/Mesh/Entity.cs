@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 
-namespace Xde.Mesh
+namespace Xde.Forms.Mesh
 {
     public class Entity
     {

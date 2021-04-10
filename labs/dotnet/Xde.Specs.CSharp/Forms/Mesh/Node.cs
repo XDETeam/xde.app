@@ -1,4 +1,4 @@
-namespace Xde.Mesh
+namespace Xde.Forms.Mesh
 {
 	/// <summary>
 	/// Preliminary idea of the mesh resource item.

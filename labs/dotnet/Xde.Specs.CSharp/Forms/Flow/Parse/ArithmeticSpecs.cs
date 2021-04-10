@@ -1,4 +1,4 @@
-namespace Xde.Flow.Parse
+namespace Xde.Forms.Flow.Parse
 {
 	/// <summary>
 	/// TODO:Tests for arithmetic parsers

@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Xde.Flow.Log
+namespace Xde.Forms.Flow.Log
 {
 	/// <summary>
 	/// TODO: Logging

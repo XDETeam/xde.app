@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Xde.Mesh
+namespace Xde.Forms.Mesh
 {
     public class When
     {
