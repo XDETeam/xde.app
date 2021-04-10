@@ -1,9 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
-namespace Xde.Ownership
+namespace Xde.Security
 {
     /// <summary>
-    /// Ownership.
+    /// Security
     /// </summary>
     /// 
     /// <remarks>

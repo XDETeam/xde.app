@@ -1,6 +1,6 @@
-﻿using Xunit;
+using Xunit;
 
-namespace Xde.Ownership
+namespace Xde.Security
 {
     /// <summary>
     /// TODO: Sign-in routines
