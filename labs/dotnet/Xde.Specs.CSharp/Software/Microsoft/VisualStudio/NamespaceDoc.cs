@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Xde.Software.VisualStudio
+namespace Xde.Software.Microsoft.VisualStudio
 {
 	/// <summary>
 	/// Microsoft Visual Studion
