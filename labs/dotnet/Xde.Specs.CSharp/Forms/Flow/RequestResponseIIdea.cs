@@ -2,6 +2,9 @@ using Autofac;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Xde.Forms.Flow
 {
@@ -11,22 +14,36 @@ namespace Xde.Forms.Flow
 	/// 
 	/// <remarks>
 	/// - One node may produce many responses (e.g. log can be an additional producer)
-	/// - One node may handler many requests (e.g. log different types of records)
+	/// - One node may handler many requests (e.g. log different types of records). 
+	/// Do we interpret this as any or all?
 	/// - One node may have zero responses (CQRS or logging that produce nothing)
 	/// 
 	/// - IRequest/IResponse classes may collect automatically and meshed into the DAG.
+	/// - IRequest/IResponse maybe smth like IConsume/IProduce, IAccept/IDeliver,
+	/// IResource/IProduct, etc.
 	/// </remarks>
 	public static class RequestResponseIIdea
 	{
-		public interface IRequest<T> { }
-
-		public interface IResponse<T> { }
-
-		public interface IHandler<TRequest, TResponse>
-			: IRequest<TRequest>
-			, IResponse<TResponse>
+		public interface IRequest<T>
 		{
+			T Request { set; }
+		}
 
+		public interface IResponse<T>
+		{
+			T Response { get; }
+		}
+
+		public interface IHandler
+		{
+			Task Handle();
+		}
+
+		//TODO:Tuples as generic args
+		public interface IContract<TRequest, TResponse>
+		{
+			TRequest Request { get; set; }
+			TResponse Response { get; set; }
 		}
 
 		public record SignInRequest(string Mail, string Password);
@@ -38,18 +55,54 @@ namespace Xde.Forms.Flow
 		public record SignInResponse(string Token);
 
 		public class SignInHash
-			: IRequest<SignInRequest>
+			: IHandler
+			, IRequest<SignInRequest>
 			, IResponse<SignInHashed>
 		{
+			private SignInRequest _request;
+			SignInRequest IRequest<SignInRequest>.Request { set => _request = value; }
 
+			private SignInHashed _response;
+			SignInHashed IResponse<SignInHashed>.Response => _response;
+
+			Task IHandler.Handle()
+			{
+				_response = new SignInHashed(
+					_request.Mail,
+					SHA256.HashData(Encoding.UTF8.GetBytes(_request.Password))
+				);
+
+				return Task.CompletedTask;
+			}
 		}
 
 		public class SignInProcess
-			: IRequest<SignInHash>
+			: IHandler
+			, IRequest<SignInHash>
 			, IResponse<SignInResponse>
 			, IResponse<SignInLog>
 		{
+			SignInLog IResponse<SignInLog>.Response => throw new NotImplementedException();
 
+			SignInResponse IResponse<SignInResponse>.Response => throw new NotImplementedException();
+
+			SignInHash IRequest<SignInHash>.Request { set => throw new NotImplementedException(); }
+
+			Task IHandler.Handle()
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		/// <summary>
+		/// API controller sample
+		/// </summary>
+		public class WebController
+		{
+			public SignInResponse SignIn(SignInRequest request)
+			{
+				throw new NotImplementedException(); //TODO:
+			}
 		}
 
 		public static void Run()
@@ -67,34 +120,34 @@ namespace Xde.Forms.Flow
 				.As<SignInProcess>()
 			;
 
-			builder
-				.RegisterGeneric((context, types, parameters) =>
-				{
-					var requestType = typeof(IEnumerable<>).MakeGenericType(
-						typeof(IRequest<>).MakeGenericType(types[0])
-					);
-					var requests =
-						(context.Resolve(requestType) as IEnumerable<object>)
-						.Select(instance => instance.GetType())
-					;
+			//builder
+			//	.RegisterGeneric((context, types, parameters) =>
+			//	{
+			//		var requestType = typeof(IEnumerable<>).MakeGenericType(
+			//			typeof(IRequest<>).MakeGenericType(types[0])
+			//		);
+			//		var requests =
+			//			(context.Resolve(requestType) as IEnumerable<object>)
+			//			.Select(instance => instance.GetType())
+			//		;
 
-					var responseType = typeof(IEnumerable<>).MakeGenericType(
-						typeof(IResponse<>).MakeGenericType(types[1])
-					);
-					var responses = 
-						(context.Resolve(responseType) as IEnumerable<object>)
-						.Select(instance => instance.GetType())
-					;
+			//		var responseType = typeof(IEnumerable<>).MakeGenericType(
+			//			typeof(IResponse<>).MakeGenericType(types[1])
+			//		);
+			//		var responses = 
+			//			(context.Resolve(responseType) as IEnumerable<object>)
+			//			.Select(instance => instance.GetType())
+			//		;
 
-					var result = requests
-						.Intersect(responses)
-						.FirstOrDefault()
-					;
+			//		var result = requests
+			//			.Intersect(responses)
+			//			.FirstOrDefault()
+			//		;
 
-					return context.Resolve(result);
-				})
-				.As(typeof(IHandler<,>))
-			;
+			//		return context.Resolve(result);
+			//	})
+			//	.As(typeof(IHandler<,>))
+			//;
 
 			var container = builder.Build();
 
@@ -111,7 +164,7 @@ namespace Xde.Forms.Flow
 				)
 				.ToArray()
 			;
-			var handler = container.Resolve<IHandler<SignInRequest, SignInHashed>>();
+			//var handler = container.Resolve<IHandler<SignInRequest, SignInHashed>>();
 
 			var signIn = new SignInRequest("stan", "!qa2Ws3eD");
 		}
