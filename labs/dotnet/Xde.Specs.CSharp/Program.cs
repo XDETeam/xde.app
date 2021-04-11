@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Xde.Forms.Flow;
 
 Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
 
@@ -16,3 +17,4 @@ Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
  *   - Опция remember (persistent cookie)
  *   
  */
+RequestResponseIIdea.Run();
