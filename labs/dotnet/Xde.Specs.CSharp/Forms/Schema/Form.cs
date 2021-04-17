@@ -1,16 +1,17 @@
 namespace Xde.Forms.Schema
 {
 	/// <summary>
-	/// Entity
+	/// Basic form
 	/// </summary>
 	/// 
 	/// <remarks>
-	/// TODO:Some very basic object schema to start steps from.
+	/// TODO:Some very basic objects schema to start steps from. This can be temporary
+	/// interpreted as a type.
 	/// </remarks>
-	public class Entity
+	public class Form
 	{
 		/// <summary>
-		/// Entity name
+		/// Form name
 		/// </summary>
 		public Fullname Fullname { get; set; }
 	}
