@@ -1,22 +1,22 @@
 namespace Xde.Forms.Schema
 {
 	/// <summary>
-	/// Feature
+	/// Aspect
 	/// </summary>
 	/// 
 	/// <remarks>
-	/// TODO:Temporary can interpret as a property of the <see cref="Form"/> that is
-	/// close to type.
+	/// TODO:Temporary can interpret as a property of the <see cref="Form"/> (that itself
+	/// is close to type).
 	/// </remarks>
-	public class Feature
+	public class Aspect
 	{
 		/// <summary>
-		/// Feature name
+		/// Aspect name
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Feature <see cref="Form">form</see>
+		/// Aspect <see cref="Form">form</see>
 		/// </summary>
 		public Form Form { get; set; }
 	}

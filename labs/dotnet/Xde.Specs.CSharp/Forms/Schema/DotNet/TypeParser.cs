@@ -24,9 +24,9 @@ namespace Xde.Forms.Schema.DotNet
 				Layer = type.AssemblyQualifiedName
 			};
 
-			var features = type
+			var aspects = type
 				.GetProperties()
-				.Select(property => new Feature()
+				.Select(property => new Aspect()
 				{
 					Name = property.Name,
 					//TODO:0 Registry
@@ -37,7 +37,7 @@ namespace Xde.Forms.Schema.DotNet
 			var result = new Form()
 			{
 				Fullname = name,
-				Features = features
+				Aspects = aspects
 			};
 
 			return result;

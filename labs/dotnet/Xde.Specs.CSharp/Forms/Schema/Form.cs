@@ -18,8 +18,8 @@ namespace Xde.Forms.Schema
 		public Fullname Fullname { get; set; }
 
 		/// <summary>
-		/// Form <see cref="Feature">features</see>
+		/// Form <see cref="Aspect">aspects</see>
 		/// </summary>
-		public IEnumerable<Feature> Features { get; set; }
+		public IEnumerable<Aspect> Aspects { get; set; }
 	}
 }

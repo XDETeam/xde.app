@@ -45,9 +45,9 @@ namespace Xde.Forms.Schema.DotNet
 			Assert.Equal(type.Namespace, form.Fullname.Namespace);
 			Assert.Equal(type.AssemblyQualifiedName, form.Fullname.Layer);
 
-			Assert.NotNull(form.Features);
+			Assert.NotNull(form.Aspects);
 			Assert.Collection(
-				form.Features,
+				form.Aspects,
 				//TODO:Add item.Form comparisons that should be reused from the registry
 				item => Assert.Equal(nameof(Sample.Id), item.Name),
 				item => Assert.Equal(nameof(Sample.Name), item.Name)
