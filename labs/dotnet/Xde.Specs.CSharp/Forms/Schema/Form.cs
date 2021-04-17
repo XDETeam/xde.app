@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Xde.Forms.Schema
 {
 	/// <summary>
@@ -11,8 +13,13 @@ namespace Xde.Forms.Schema
 	public class Form
 	{
 		/// <summary>
-		/// Form name
+		/// Form <see cref="Fullname">name</see>
 		/// </summary>
 		public Fullname Fullname { get; set; }
+
+		/// <summary>
+		/// Form <see cref="Feature">features</see>
+		/// </summary>
+		public IEnumerable<Feature> Features { get; set; }
 	}
 }
