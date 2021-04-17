@@ -21,5 +21,22 @@ namespace Xde.Forms.Schema
 		/// Form <see cref="Aspect">aspects</see>
 		/// </summary>
 		public IEnumerable<Aspect> Aspects { get; set; }
+
+		/// <summary>
+		/// Construct default
+		/// </summary>
+		public Form()
+		{
+
+		}
+
+		/// <summary>
+		/// TODO: Construct using <see cref="Fullname"/>
+		/// </summary>
+		/// <param name="name"></param>
+		public Form(Fullname name)
+		{
+			Fullname = name;
+		}
 	}
 }
