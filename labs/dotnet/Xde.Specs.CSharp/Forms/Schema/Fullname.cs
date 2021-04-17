@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
 namespace Xde.Forms.Schema
 {
 	/// <summary>
@@ -30,5 +34,21 @@ namespace Xde.Forms.Schema
 		/// a layer.
 		/// </remarks>
 		public string Layer { get; set; }
+
+		/// <summary>
+		/// TODO:Fullname hash
+		/// </summary>
+		/// 
+		/// <remarks>
+		/// It would be good to have some short Id for the <see cref="Fullname"/>.
+		/// This is temporary solution using SHA2. Not optimal, probably cache would be also
+		/// good. Maybe <see cref="object.GetHashCode()"/> will be enough. Let's say
+		/// codes for Name/Namespace/Layer will be joined into long, Guid, ...
+		/// </remarks>
+		public string Hash => Convert.ToBase64String(
+			SHA256.HashData(
+				Encoding.UTF8.GetBytes($"{Namespace}.{Name}.{Layer}")
+			)
+		);
 	}
 }
