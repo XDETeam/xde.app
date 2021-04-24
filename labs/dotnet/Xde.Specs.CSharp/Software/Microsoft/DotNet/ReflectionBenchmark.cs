@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Xde.Software.Microsoft.DotNet
@@ -14,6 +15,12 @@ namespace Xde.Software.Microsoft.DotNet
 
 		private static readonly Type[] _exportedTypes = _assembly.GetExportedTypes();
 
+		private static readonly Type[] _publicAndNonAbstract = _types
+			.Where(type => type.IsPublic)
+			.Where(type => !type.IsAbstract)
+			.ToArray()
+		;
+
 		[Benchmark]
 		public Type[] GetExportedTypes() => _assembly.GetExportedTypes();
 
@@ -25,5 +32,15 @@ namespace Xde.Software.Microsoft.DotNet
 
 		[Benchmark]
 		public Type[] GetCachedTypes() => _types;
+
+		[Benchmark]
+		public Type[] GetNonAbstract() => _assembly
+			.GetExportedTypes()
+			.Where(type => !type.IsAbstract)
+			.ToArray()
+		;
+
+		[Benchmark]
+		public Type[] GetCachedNonAbstract() => _publicAndNonAbstract;
 	}
 }
