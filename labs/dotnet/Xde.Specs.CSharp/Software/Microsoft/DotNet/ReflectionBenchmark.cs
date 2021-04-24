@@ -22,16 +22,19 @@ namespace Xde.Software.Microsoft.DotNet
 		;
 
 		[Benchmark]
+		public Type[] GetTypes() => _assembly.GetTypes();
+
+		[Benchmark(Baseline = true)]
 		public Type[] GetExportedTypes() => _assembly.GetExportedTypes();
 
 		[Benchmark]
-		public Type[] GetCachedExportedTypes() => _exportedTypes;
-
-		[Benchmark]
-		public Type[] GetTypes() => _assembly.GetTypes();
+		public Type[] GetDefinedTypes() => _assembly.DefinedTypes.ToArray();
 
 		[Benchmark]
 		public Type[] GetCachedTypes() => _types;
+
+		[Benchmark]
+		public Type[] GetCachedExportedTypes() => _exportedTypes;
 
 		[Benchmark]
 		public Type[] GetNonAbstract() => _assembly
