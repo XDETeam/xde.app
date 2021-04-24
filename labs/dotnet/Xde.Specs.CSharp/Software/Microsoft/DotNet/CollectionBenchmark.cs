@@ -94,5 +94,34 @@ namespace Xde.Software.Microsoft.DotNet
 			DoRecurseUsingList(tree, list);
 			Assert.Equal(9331, list.Count);
 		}
+
+		[Benchmark]
+		public void ReuseListUsingNew()
+		{
+			for (var index = 0; index < 100; index++)
+			{
+				var list = new List<int>(16);
+				for (var i = 0; i < 16; i++)
+				{
+					list.Add(i);
+				}
+			}
+		}
+
+		[Benchmark]
+		public void ReuseListUsingClear()
+		{
+			var list = new List<int>(16);
+
+			for (var index = 0; index < 100; index++)
+			{
+				for (var i = 0; i < 16; i++)
+				{
+					list.Add(i);
+				}
+
+				list.Clear();
+			}
+		}
 	}
 }
