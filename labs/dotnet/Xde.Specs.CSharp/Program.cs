@@ -1,6 +1,7 @@
+using BenchmarkDotNet.Running;
 using System;
 using System.Reflection;
-using Xde.Forms.Flow;
+using Xde.Software.Microsoft.DotNet;
 
 Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
 
@@ -17,4 +18,7 @@ Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
  *   - Опция remember (persistent cookie)
  *   
  */
-RequestResponseIIdea.Run();
+
+// RequestResponseIIdea.Run();
+
+var summary = BenchmarkRunner.Run<ReflectionBenchmark>();
