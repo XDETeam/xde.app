@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Collections
 {
-	public class CollectionBenchmark
+	public class RecurseGeneratorBenchmark
 	{
 		public class Node
 		{
