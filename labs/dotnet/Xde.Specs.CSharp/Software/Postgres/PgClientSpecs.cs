@@ -11,16 +11,18 @@ namespace Xde.Software.Postgres
 		public const string ImageName = "postgres";
 		public const string ImageTag = "13.3";
 		public const int HostPort = 54320;
+		public const string PgUser = "postgres";
+		public const string PgPassword = "!qa2Ws3eD";
 
 		//TODO:
 		[Fact]
 		public async void Temp()
 		{
-			using var client = new DockerClientConfiguration()
+			using var docker = new DockerClientConfiguration()
 				.CreateClient()
 			;
 
-			await client.Images.CreateImageAsync(
+			await docker.Images.CreateImageAsync(
 				new ImagesCreateParameters
 				{
 					FromImage = ImageName,
@@ -30,14 +32,14 @@ namespace Xde.Software.Postgres
 				new Progress<JSONMessage>()
 			);
 
-			var specs = new CreateContainerParameters()
+			var container = await docker.Containers.CreateContainerAsync(new CreateContainerParameters()
 			{
 				Name = "pg_temp",
 				Image = $"{ImageName}:{ImageTag}",
 				Env = new List<string>()
 				{
-					"POSTGRES_PASSWORD=!qa2Ws3eD",
-					"POSTGRES_USER=postgres"
+					$"POSTGRES_USER={PgUser}",
+					$"POSTGRES_PASSWORD={PgPassword}"
 				},
 				ExposedPorts = new Dictionary<string, EmptyStruct>()
 				{
@@ -57,18 +59,29 @@ namespace Xde.Software.Postgres
 						}
 					}
 				}
-			};
+			});
 
-			var container = await client.Containers.CreateContainerAsync(specs);
+			try
+			{
+				await docker.Containers.StartContainerAsync(
+					container.ID,
+					new ContainerStartParameters()
+				);
 
-			await client.Containers.RemoveContainerAsync(
-				container.ID,
-				new ContainerRemoveParameters
-				{
-					Force = true,
-					RemoveVolumes = true
-				}
-			);
+				var client = new PgClient("127.0.0.1", HostPort, PgUser, PgPassword);
+				client.Connect();
+			}
+			finally
+			{
+				await docker.Containers.RemoveContainerAsync(
+					container.ID,
+					new ContainerRemoveParameters
+					{
+						Force = true,
+						RemoveVolumes = true
+					}
+				);
+			}
 		}
 	}
 }
