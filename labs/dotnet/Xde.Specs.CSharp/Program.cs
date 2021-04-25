@@ -1,6 +1,7 @@
 using BenchmarkDotNet.Running;
 using System;
 using System.Reflection;
+using Xde.Forms.Collections;
 using Xde.Software.Microsoft.DotNet;
 
 Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
@@ -21,6 +22,6 @@ Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
 
 // RequestResponseIIdea.Run();
 
-// var summary = BenchmarkRunner.Run<CollectionBenchmark>();
 // var summary = BenchmarkRunner.Run<ReflectionBenchmark>();
 var summary = BenchmarkRunner.Run<ReflectionAssistantBenchmark>();
+// var summary = BenchmarkRunner.Run<DictionaryBenchmark>();
