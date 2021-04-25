@@ -1,7 +1,7 @@
 using System.Linq;
 using Xunit;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Code
 {
 	public class ReflectionAssistantSpecs
 	{
@@ -20,6 +20,46 @@ namespace Xde.Software.Microsoft.DotNet
 			, ISampleGenericContract<int>
 		{
 
+		}
+
+		public interface IValidator<T>
+		{
+			bool Validate(T model);
+		}
+
+		public interface IValidatedContract
+		{
+
+		}
+
+		public class ValidatedRequest
+			: IValidatedContract
+		{
+
+		}
+
+		public class SomeValidator
+			: IValidator<IValidatedContract>
+		{
+			bool IValidator<IValidatedContract>.Validate(IValidatedContract model) => true;
+		}
+
+		// TODO: If we have a IValidator<ISomeContract> and looking for IValidator<T>
+		// where T is ISomeContract.
+		[Fact]
+		public void Lookup_ValidatorForSpecificType_ReturnsValidatorForContract()
+		{
+			var assistant = new ReflectionAssistant();
+			assistant.AddTypes(GetType().Assembly);
+			assistant.Prepare();
+
+			var actual = assistant
+				.Lookup(typeof(IValidator<ValidatedRequest>))
+				.ToArray()
+			;
+
+			Assert.Single(actual);
+			Assert.Equal(typeof(SomeValidator), actual.Single());
 		}
 
 		[Fact]

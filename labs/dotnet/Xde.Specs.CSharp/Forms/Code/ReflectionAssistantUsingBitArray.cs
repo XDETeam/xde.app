@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Code
 {
 	public class ReflectionAssistantUsingBitArray
 	{

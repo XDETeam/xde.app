@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Code
 {
 	public class ReflectionBenchmark
 	{

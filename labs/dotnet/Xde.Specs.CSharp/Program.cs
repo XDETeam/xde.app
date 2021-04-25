@@ -1,8 +1,7 @@
 using BenchmarkDotNet.Running;
 using System;
 using System.Reflection;
-using Xde.Forms.Collections;
-using Xde.Software.Microsoft.DotNet;
+using Xde.Forms.Code;
 
 Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
 

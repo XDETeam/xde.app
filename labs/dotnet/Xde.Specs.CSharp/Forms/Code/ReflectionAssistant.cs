@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Code
 {
 	/// TODO:Rename to Reflector?
 	/// TODO:Keep only sources, may be initialize using array initializer
@@ -17,6 +16,8 @@ namespace Xde.Software.Microsoft.DotNet
 
 		private List<Type> _types = new();
 		private Tuple<string, int>[] _names;
+		// TODO:There are some doubts between Immutable and straighforward Dictionary.
+		// Look at DictionaryBenchmark
 		private ImmutableDictionary<Type, List<Type>> _contracts;
 
 		public ReflectionAssistant()

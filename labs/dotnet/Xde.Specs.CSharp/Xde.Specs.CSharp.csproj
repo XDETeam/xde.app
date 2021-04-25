@@ -25,6 +25,7 @@
 	  <Folder Include="Code\Composition\" />
 	  <Folder Include="Code\Application\" />
 	  <Folder Include="Code\Grammar\" />
+	  <Folder Include="Software\Microsoft\DotNet\" />
 	</ItemGroup>
 
 </Project>

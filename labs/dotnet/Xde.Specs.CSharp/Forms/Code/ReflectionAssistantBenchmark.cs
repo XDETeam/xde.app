@@ -2,9 +2,9 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using Xunit;
-using static Xde.Software.Microsoft.DotNet.ReflectionAssistantSpecs;
+using static Xde.Forms.Code.ReflectionAssistantSpecs;
 
-namespace Xde.Software.Microsoft.DotNet
+namespace Xde.Forms.Code
 {
 	public class ReflectionAssistantBenchmark
 	{
