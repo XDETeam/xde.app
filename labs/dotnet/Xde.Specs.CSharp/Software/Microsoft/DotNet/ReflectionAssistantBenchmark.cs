@@ -10,6 +10,7 @@ namespace Xde.Software.Microsoft.DotNet
 	{
 		private Assembly _assembly;
 		private ReflectionAssistant _assistant;
+		private ReflectionAssistantUsingBitArray _assistantBitArray;
 
 		[GlobalSetup]
 		public void Setup()
@@ -19,12 +20,25 @@ namespace Xde.Software.Microsoft.DotNet
 				.AddTypes(_assembly)
 				.Prepare()
 			;
+			_assistantBitArray = new ReflectionAssistantUsingBitArray()
+				.AddTypes(_assembly)
+				.Prepare()
+			;
 		}
 
 		[Benchmark]
-		public void PreapreAssistant()
+		public void PrepareAssistant()
 		{
 			_assistant = new ReflectionAssistant()
+				.AddTypes(_assembly)
+				.Prepare()
+			;
+		}
+
+		[Benchmark]
+		public void PrepareBitArrayAssistant()
+		{
+			_assistantBitArray = new ReflectionAssistantUsingBitArray()
 				.AddTypes(_assembly)
 				.Prepare()
 			;
@@ -42,9 +56,31 @@ namespace Xde.Software.Microsoft.DotNet
 		}
 
 		[Benchmark]
+		public void LookupBitArrayGeneric()
+		{
+			var result = _assistantBitArray
+				.Lookup(typeof(ISampleGenericContract<int>))
+				.ToArray()
+			;
+
+			Assert.Single(result);
+		}
+
+		[Benchmark]
 		public void LookupOpenGeneric()
 		{
 			var result = _assistant
+				.Lookup(typeof(ISampleGenericContract<>))
+				.ToArray()
+			;
+
+			Assert.Single(result);
+		}
+
+		[Benchmark]
+		public void LookupBitArrayOpenGeneric()
+		{
+			var result = _assistantBitArray
 				.Lookup(typeof(ISampleGenericContract<>))
 				.ToArray()
 			;

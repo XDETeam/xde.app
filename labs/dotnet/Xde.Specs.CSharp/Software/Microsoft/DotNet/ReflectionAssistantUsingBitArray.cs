@@ -2,29 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Reflection;
 
 namespace Xde.Software.Microsoft.DotNet
 {
-	/// TODO:Rename to Reflector?
-	/// TODO:Keep only sources, may be initialize using array initializer
-	/// TODO:Think about replacing BitArray with simple list of implementation types
-	/// (indexes).
-	public class ReflectionAssistant
+	public class ReflectionAssistantUsingBitArray
 	{
-		private static readonly IEnumerable<Type> _empty = Enumerable.Empty<Type>();
-
 		private List<Type> _types = new();
-		private Tuple<string, int>[] _names;
-		private ImmutableDictionary<Type, List<Type>> _contracts;
+		private ImmutableDictionary<Type, BitArray> _contracts;
 
-		public ReflectionAssistant()
+		public ReflectionAssistantUsingBitArray()
 		{
 
 		}
 
-		public ReflectionAssistant AddTypes(Assembly assembly)
+		public ReflectionAssistantUsingBitArray AddTypes(Assembly assembly)
 		{
 			foreach (var type in assembly.GetTypes())
 			{
@@ -37,17 +29,23 @@ namespace Xde.Software.Microsoft.DotNet
 
 		public IEnumerable<Type> Lookup(Type contract)
 		{
-			if (_contracts.TryGetValue(contract, out var result))
+			if (!_contracts.TryGetValue(contract, out var bitmap))
 			{
-				return result;
+				yield break;
 			}
 
-			return _empty;
+			for (var index = 0; index < bitmap.Length; index++)
+			{
+				if (bitmap[index])
+				{
+					yield return _types[index];
+				}
+			}
 		}
 
-		public ReflectionAssistant Prepare()
+		public ReflectionAssistantUsingBitArray Prepare()
 		{
-			var builder = ImmutableDictionary.CreateBuilder<Type, List<Type>>();
+			var builder = ImmutableDictionary.CreateBuilder<Type, BitArray>();
 			var contracts = new List<Type>(16);
 
 			for (var index = 0; index < _types.Count; index++)
@@ -69,13 +67,13 @@ namespace Xde.Software.Microsoft.DotNet
 				{
 					foreach (var contract in contracts)
 					{
-						if (!builder.TryGetValue(contract, out var types))
+						if (!builder.TryGetValue(contract, out var typesBitmap))
 						{
-							types = new List<Type>(_types.Count);
-							builder.Add(contract, types);
+							typesBitmap = new BitArray(_types.Count);
+							builder.Add(contract, typesBitmap);
 						}
 
-						types.Add(type);
+						typesBitmap.Set(index, true);
 					}
 
 					// TODO: CollectionBenchmark.ReuseListUsingClear looks like being
