@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Xde.Forms.Code
 {
-	public class ReflectionAssistantSpecs
+	public class ReflectionCacheSpecs
 	{
 		public interface ISampleContract
 		{
@@ -49,7 +49,7 @@ namespace Xde.Forms.Code
 		[Fact]
 		public void Lookup_ValidatorForSpecificType_ReturnsValidatorForContract()
 		{
-			var assistant = new ReflectionAssistant();
+			var assistant = new ReflectionCache();
 			assistant.AddTypes(GetType().Assembly);
 			assistant.Prepare();
 
@@ -65,7 +65,7 @@ namespace Xde.Forms.Code
 		[Fact]
 		public void Lookup_ExistingOpenGeneric_ReturnsValid()
 		{
-			var assistant = new ReflectionAssistant();
+			var assistant = new ReflectionCache();
 			assistant.AddTypes(GetType().Assembly);
 			assistant.Prepare();
 
@@ -81,7 +81,7 @@ namespace Xde.Forms.Code
 		[Fact]
 		public void Lookup_ExistingGeneric_ReturnsValid()
 		{
-			var assistant = new ReflectionAssistant();
+			var assistant = new ReflectionCache();
 			assistant.AddTypes(GetType().Assembly);
 			assistant.Prepare();
 

@@ -2,25 +2,25 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using Xunit;
-using static Xde.Forms.Code.ReflectionAssistantSpecs;
+using static Xde.Forms.Code.ReflectionCacheSpecs;
 
 namespace Xde.Forms.Code
 {
-	public class ReflectionAssistantBenchmark
+	public class ReflectionCacheBenchmark
 	{
 		private Assembly _assembly;
-		private ReflectionAssistant _assistant;
-		private ReflectionAssistantUsingBitArray _assistantBitArray;
+		private ReflectionCache _assistant;
+		private ReflectionCacheUsingBitArray _assistantBitArray;
 
 		[GlobalSetup]
 		public void Setup()
 		{
-			_assembly = typeof(ReflectionAssistantBenchmark).Assembly;
-			_assistant = new ReflectionAssistant()
+			_assembly = typeof(ReflectionCacheBenchmark).Assembly;
+			_assistant = new ReflectionCache()
 				.AddTypes(_assembly)
 				.Prepare()
 			;
-			_assistantBitArray = new ReflectionAssistantUsingBitArray()
+			_assistantBitArray = new ReflectionCacheUsingBitArray()
 				.AddTypes(_assembly)
 				.Prepare()
 			;
@@ -29,7 +29,7 @@ namespace Xde.Forms.Code
 		[Benchmark]
 		public void PrepareAssistant()
 		{
-			_assistant = new ReflectionAssistant()
+			_assistant = new ReflectionCache()
 				.AddTypes(_assembly)
 				.Prepare()
 			;
@@ -38,7 +38,7 @@ namespace Xde.Forms.Code
 		[Benchmark]
 		public void PrepareBitArrayAssistant()
 		{
-			_assistantBitArray = new ReflectionAssistantUsingBitArray()
+			_assistantBitArray = new ReflectionCacheUsingBitArray()
 				.AddTypes(_assembly)
 				.Prepare()
 			;

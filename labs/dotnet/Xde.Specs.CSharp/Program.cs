@@ -22,5 +22,5 @@ Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
 // RequestResponseIIdea.Run();
 
 // var summary = BenchmarkRunner.Run<ReflectionBenchmark>();
-var summary = BenchmarkRunner.Run<ReflectionAssistantBenchmark>();
+var summary = BenchmarkRunner.Run<ReflectionCacheBenchmark>();
 // var summary = BenchmarkRunner.Run<DictionaryBenchmark>();
