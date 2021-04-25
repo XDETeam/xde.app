@@ -1,7 +1,6 @@
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -14,10 +13,11 @@ namespace Xde.Software.Postgres
 	/// 
 	/// <remarks>
 	/// This experiment is targeting many goals:
+	/// - Consider DB negotiation to be part of event-based flow
+	/// - DB should be simply an implementation of a network service
+	/// - Share the same solution for different DBMS/MQ/EP/etc
 	/// - Explore working with structured streams
 	/// - Extend such structured streams to be employed in (de)serialization
-	/// - Share the same solution for different DBMS/MQ/EP/etc
-	/// - Consider DB negotiation to be part of event-based flow
 	/// 
 	/// - It would be interesting to make some benchmarks and measure timings for
 	/// different negotiation stages.
