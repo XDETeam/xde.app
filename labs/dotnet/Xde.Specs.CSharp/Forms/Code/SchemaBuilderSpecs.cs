@@ -1,18 +1,19 @@
 using System;
 using Xde.Forms.Flow.Parse;
+using Xde.Forms.Schema;
 using Xunit;
 
-namespace Xde.Forms.Schema.DotNet
+namespace Xde.Forms.Code
 {
 	/// <summary>
-	/// TODO:<see cref="TypeParser"/> specs
+	/// TODO:<see cref="SchemaBuilder"/> specs
 	/// </summary>
 	/// 
 	/// <remarks>
 	/// TODO:It would be nice to implement abstractions for parsers, because most of tests
 	/// will be the same. And maybe implement class-per-test scenario.
 	/// </remarks>
-	public class TypeParserSpecs
+	public class SchemaBuilderSpecs
 	{
 		public class Sample
 		{
@@ -24,7 +25,7 @@ namespace Xde.Forms.Schema.DotNet
 		[Fact]
 		public void Parse_TypeIsNull_ThrowException()
 		{
-			IParser<Type, Form> parser = new TypeParser();
+			IParser<Type, Form> parser = new SchemaBuilder();
 			
 			var e = Assert.Throws<ArgumentNullException>(() => parser.Parse(null));
 
@@ -34,7 +35,7 @@ namespace Xde.Forms.Schema.DotNet
 		[Fact]
 		public void Parse_SampleType_ProperForm()
 		{
-			IParser<Type, Form> parser = new TypeParser();
+			IParser<Type, Form> parser = new SchemaBuilder();
 			
 			var form = parser.Parse(typeof(Sample));
 

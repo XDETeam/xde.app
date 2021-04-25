@@ -1,13 +1,14 @@
 using System;
 using System.Linq;
 using Xde.Forms.Flow.Parse;
+using Xde.Forms.Schema;
 
-namespace Xde.Forms.Schema.DotNet
+namespace Xde.Forms.Code
 {
 	/// <summary>
 	/// Parser from <see cref="System.Type"/> into <see cref="Form"/>
 	/// </summary>
-	public class TypeParser
+	public class SchemaBuilder
 		: IParser<Type, Form>
 	{
 		/// <summary>
