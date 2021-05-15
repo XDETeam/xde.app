@@ -118,3 +118,9 @@ var services = AllTypes
 ;
 
 services
+
+#!markdown
+
+## TODO: Build-time registration
+
+TODO: Is it viable to impelement build-time registrations? Sometimes we will have to import packages in the binary form.
