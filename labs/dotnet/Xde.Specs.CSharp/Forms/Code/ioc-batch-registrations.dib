@@ -28,3 +28,29 @@ var services = AllTypes
 ;
 
 services
+
+#!markdown
+
+## Predicates registration
+
+Each batch may have a rule incapsulated in the function that returns contracts. Then we are scanning all types only one time. But if there are a lot of rules, we have the same number of checks for every type:
+
+    PROBLEM: If many rules defined
+
+#!csharp
+
+var rules = new List<Func<Type, IEnumerable<Type>>>() {
+    type => !type.IsAbstract && typeof(IHostedService).IsAssignableFrom(type)
+        ? Enumerable.Repeat(typeof(IHostedService), 1)
+        : Enumerable.Empty<Type>()
+};
+
+var services = AllTypes.SelectMany(type => rules
+        .SelectMany(rule => rule(type))
+        .Select(contract => (type, contract))
+    )
+    .Select(tuple => new { HostedService = tuple.Item1.Name })
+;
+
+services
+
