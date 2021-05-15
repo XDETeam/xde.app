@@ -92,3 +92,29 @@ var db = new TypesDb(AllTypes);
 var services = db.Of<IHostedService>().Select(type => type.Name);
 
 services
+
+#!markdown
+
+## TODO: Hybrid solution
+
+Consumers are defining simple rules, for example interfaces they expect and then optionally more complex predicates. So we can say that are indexing predicates not types. Types walker is going through all types one time only and quickly seek for the applicable predicates. Compared to indexed types database we expect very small memory footprint.
+
+#!csharp
+
+var rules = new Dictionary<Type, Predicate<Type>>
+{
+    { typeof(IHostedService), type => true }
+};
+
+var services = AllTypes
+    .Where(type => !type.IsAbstract)
+    .SelectMany(type => 
+        Enumerable.Repeat(type, 1)
+        .Union(type.GetInterfaces())
+        .Select(contract => (Type: type, Contract: contract))
+    )
+    .Where(tuple => rules.TryGetValue(tuple.Contract, out var predicate) && predicate(tuple.Type))
+    .Select(tuple => tuple.Type.Name)
+;
+
+services
