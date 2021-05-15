@@ -54,3 +54,41 @@ var services = AllTypes.SelectMany(type => rules
 
 services
 
+#!markdown
+
+## Indexed types
+
+We can create additional structures like indexes that will speedup requests. Instead of types scans we will have index seeks. As problems we can consider additional memory footprint and a balance between implementation complexity and comprehensive query language.
+
+TODO: Class naming: ReflectionCache, TypesDb, TypeIndexer, TypeWalker.
+
+#!csharp
+
+public class TypesDb {
+    private readonly Dictionary<Type, Type[]> _indexes;
+
+    public TypesDb(Type[] types) {
+        _indexes = AllTypes
+            .Where(type => !type.IsAbstract)
+            // For simplicity we take the "type" itself and all interfaces it implements (GetInterfaces())
+            .SelectMany(type => 
+                Enumerable.Repeat(type, 1)
+                .Union(type.GetInterfaces())
+                .Select(contract => (Type: type, Contract: contract))
+            )
+            .GroupBy(tuple => tuple.Contract)
+            .ToDictionary(
+                group => group.Key,
+                group => group.Select(item => item.Type).ToArray()
+            )
+        ;
+    
+    }
+
+    public Type[] Of<T>() => _indexes.TryGetValue(typeof(T), out var result) ? result : null;
+}
+
+var db = new TypesDb(AllTypes);
+var services = db.Of<IHostedService>().Select(type => type.Name);
+
+services
