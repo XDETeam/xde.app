@@ -2,6 +2,8 @@
 
 # Batch registrations in IoC
 
+	TODO: To develop IoC-related code it would be nice to define IoC requirements/cases.
+
 One of the frequently used strategies is to scan existing types filtered by some predicate and register them in the IoC container. Doing this multiple times in run-time (scanning all existing types, applying predicate, etc) can be costly.
 
     PROBLEM: For each registration pattern we have to scan all types
@@ -12,15 +14,18 @@ For example we have some abstraction (IHostedService) and want to register all i
 
 using System.Collections.Generic;
 
+// This is some basic contract we will play around
 public interface IHostedService {  }
 
+// Some classes both implementing or not the main contract
 public class MessageQueueConsumer : IHostedService { }
 public class MailService : IHostedService { }
-public class AnotherType  { }
 public class Program { }
 
+// Prepare list of all exported types
 public static Type[] AllTypes = typeof(Program).Assembly.GetExportedTypes();
 
+// Straightforward solution when we simply scan all exported types and filter by assignable from the contract
 var services = AllTypes
     .Where(type => !type.IsAbstract)
     .Where(type => typeof(IHostedService).IsAssignableFrom(type))
@@ -39,6 +44,8 @@ Each batch may have a rule incapsulated in the function that returns contracts. 
 
 #!csharp
 
+// Rules are functions that depend on input type and return set of contracts. In this case for any type
+// that implements IHostedService we return this type.
 var rules = new List<Func<Type, IEnumerable<Type>>>() {
     type => !type.IsAbstract && typeof(IHostedService).IsAssignableFrom(type)
         ? Enumerable.Repeat(typeof(IHostedService), 1)
@@ -76,7 +83,9 @@ public class TypesDb {
                 .Union(type.GetInterfaces())
                 .Select(contract => (Type: type, Contract: contract))
             )
+			// Then from grouping type->contracts we convert into contract->types
             .GroupBy(tuple => tuple.Contract)
+			// And convert it to the dictionary (simple index implementation)
             .ToDictionary(
                 group => group.Key,
                 group => group.Select(item => item.Type).ToArray()
@@ -85,6 +94,7 @@ public class TypesDb {
     
     }
 
+	// Getting list of implementations is straightworward, because already stored in this form.
     public Type[] Of<T>() => _indexes.TryGetValue(typeof(T), out var result) ? result : null;
 }
 
@@ -101,6 +111,10 @@ Consumers are defining simple rules, for example interfaces they expect and then
 
 #!csharp
 
+// Rules are more simple. We imply that to be registered in IoC specific type should anyway implement
+// the contract it gonna to be registered as. And only if it is, then we can make an additional check with
+// the predicate.
+// TODO: Potentially we can use abstract class and register run-time compiled implementations of such class.
 var rules = new Dictionary<Type, Predicate<Type>>
 {
     { typeof(IHostedService), type => true }
