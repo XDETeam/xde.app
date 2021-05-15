@@ -1,0 +1,30 @@
+#!markdown
+
+# Batch registrations in IoC
+
+One of the frequently used strategies is to scan existing types filtered by some predicate and register them in the IoC container. Doing this multiple times in run-time (scanning all existing types, applying predicate, etc) can be costly.
+
+    PROBLEM: For each registration pattern we have to scan all types
+
+For example we have some abstraction (IHostedService) and want to register all implementations (MessageQueueConsumer, MailService). Some of such implementations can be situated in reference packages.
+
+#!csharp
+
+using System.Collections.Generic;
+
+public interface IHostedService {  }
+
+public class MessageQueueConsumer : IHostedService { }
+public class MailService : IHostedService { }
+public class AnotherType  { }
+public class Program { }
+
+public static Type[] AllTypes = typeof(Program).Assembly.GetExportedTypes();
+
+var services = AllTypes
+    .Where(type => !type.IsAbstract)
+    .Where(type => typeof(IHostedService).IsAssignableFrom(type))
+    .Select(type => new { HostedService = type.Name })
+;
+
+services
