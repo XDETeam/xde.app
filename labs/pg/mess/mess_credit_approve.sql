@@ -13,7 +13,7 @@ $$
             WHERE
                 url = _url
             AND
-                "to" NOT LIKE '%:%'
+                "to"::text NOT LIKE '%:%'
         ) INSERT INTO mess.mesh (url, content)
         SELECT "to"::text::ltree, content FROM cte_data
         ON CONFLICT (url) DO UPDATE SET content = excluded.content;
