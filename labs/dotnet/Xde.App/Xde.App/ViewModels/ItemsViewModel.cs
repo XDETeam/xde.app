@@ -34,6 +34,8 @@ namespace Xde.App.ViewModels
 
             try
             {
+				var connection = GetDbConnection();
+
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)

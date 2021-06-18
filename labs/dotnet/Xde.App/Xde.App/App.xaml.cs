@@ -16,6 +16,9 @@ namespace Xde.App
 
 			services.AddTransient<IDataStore<Item>, MockDataStore>();
 
+			services.AddSingleton<PgSettings>();
+			services.AddSingleton<IDbConnectionFactory, PgConnectionFactory>();
+
 			ServiceProvider = services.BuildServiceProvider();
 		}
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Xde.App.Models;
@@ -11,6 +12,11 @@ namespace Xde.App.ViewModels
 	public class BaseViewModel : INotifyPropertyChanged
     {
 		public IDataStore<Item> DataStore => App.ServiceProvider.GetService<IDataStore<Item>>();
+		public IDbConnection GetDbConnection() => App
+			.ServiceProvider
+			.GetService<IDbConnectionFactory>()
+			.CreateConnection()
+		;
 
 		bool isBusy = false;
 
