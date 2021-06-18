@@ -18,8 +18,13 @@ namespace Xde.App.ViewModels
 
 		public ICommand NodeReviewCommand { get; }
 
-		public int Content { get; set; } = DefaultContent;
+		public string Content { get; set; } = DefaultContent;
 
 		public const string DefaultContent = "<some prop=\"val\">test</some>";
+
+		public string Filter { get; set; } = DefaultFilter;
+
+		// TODO: Null?
+		public const string DefaultFilter = "";
     }
 }
