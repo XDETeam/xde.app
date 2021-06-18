@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
 using Xde.App.Models;
 using Xde.App.Views;
 
 namespace Xde.App.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+	public class ItemsViewModel : BaseViewModel
     {
         private Item _selectedItem;
 

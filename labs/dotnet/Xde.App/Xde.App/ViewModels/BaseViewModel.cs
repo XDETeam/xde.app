@@ -1,20 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-using Xamarin.Forms;
-
+using Microsoft.Extensions.DependencyInjection;
 using Xde.App.Models;
 using Xde.App.Services;
 
 namespace Xde.App.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+	public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		public IDataStore<Item> DataStore => App.ServiceProvider.GetService<IDataStore<Item>>();
 
-        bool isBusy = false;
+		bool isBusy = false;
+
         public bool IsBusy
         {
             get { return isBusy; }

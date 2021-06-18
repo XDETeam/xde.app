@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using Xamarin.Forms;
-using Xde.App.ViewModels;
 using Xde.App.Views;
 
 namespace Xde.App
 {
-    public partial class AppShell : Xamarin.Forms.Shell
-    {
+	public partial class AppShell : Shell
+	{
         public AppShell()
         {
             InitializeComponent();

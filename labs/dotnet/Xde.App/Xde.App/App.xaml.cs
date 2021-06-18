@@ -1,19 +1,30 @@
-﻿using System;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Xde.App.Models;
 using Xde.App.Services;
-using Xde.App.Views;
 
 namespace Xde.App
 {
-    public partial class App : Application
+	public partial class App : Application
     {
+		public static IServiceProvider ServiceProvider { get; set; }
 
-        public App()
+		public void SetupServices()
+		{
+			var services = new ServiceCollection();
+
+			services.AddTransient<IDataStore<Item>, MockDataStore>();
+
+			ServiceProvider = services.BuildServiceProvider();
+		}
+
+		public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            SetupServices();
+
             MainPage = new AppShell();
         }
 
