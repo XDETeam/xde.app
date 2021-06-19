@@ -56,7 +56,7 @@ namespace Xde.App.ViewModels
 		{
 			using (IDbConnection conn = _db.CreateConnection())
 			{
-				var res = conn.Query<Result>("mess.node_review", new { _filter = Filter, _operator = SelectedOperator }, commandType: CommandType.StoredProcedure);
+				var res = await conn.QueryAsync<Result>("mess.node_review", new { _filter = Filter, _operator = SelectedOperator }, commandType: CommandType.StoredProcedure);
 				Content = res.SingleOrDefault()?.content;
 				Url = res.SingleOrDefault()?.url;
 			}
