@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Xde.App.Models;
+using Xde.App.Services;
 using Xde.App.ViewModels;
 
 namespace Xde.App.Views
@@ -16,7 +17,7 @@ namespace Xde.App.Views
         public NodeReviewPage()
         {
             InitializeComponent();
-            BindingContext = new NodeReviewViewModel();
+            BindingContext = new NodeReviewViewModel(new PgConnectionFactory());
         }
     }
 }
