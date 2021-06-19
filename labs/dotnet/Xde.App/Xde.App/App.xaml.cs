@@ -1,8 +1,10 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xde.App.Models;
 using Xde.App.Services;
+using Xde.App.ViewModels;
 
 namespace Xde.App
 {
@@ -19,7 +21,14 @@ namespace Xde.App
 			services.AddSingleton<PgSettings>();
 			services.AddSingleton<IDbConnectionFactory, PgConnectionFactory>();
 
+			services.AddTransient<ItemsViewModel>();
+
 			ServiceProvider = services.BuildServiceProvider();
+
+			var test = ServiceProvider.GetService<ItemsViewModel>();//TODO:0
+
+			DependencyResolver.ResolveUsing(type => ServiceProvider.GetService(type));
+			DependencyResolver.ResolveUsing((type, dependencies) => ServiceProvider.GetService(type));
 		}
 
 		public App()

@@ -11,8 +11,8 @@ namespace Xde.App.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
-        }
+			BindingContext = _viewModel = DependencyService.Resolve<ItemsViewModel>();
+		}
 
         protected override void OnAppearing()
         {

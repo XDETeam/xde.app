@@ -20,7 +20,7 @@ namespace Xde.App.ViewModels
 
 		bool isBusy = false;
 
-        public bool IsBusy
+		public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }

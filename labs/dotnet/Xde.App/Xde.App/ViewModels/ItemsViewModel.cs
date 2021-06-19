@@ -4,21 +4,25 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xde.App.Models;
+using Xde.App.Services;
 using Xde.App.Views;
 
 namespace Xde.App.ViewModels
 {
 	public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+		private readonly IDbConnectionFactory _db;
+		private Item _selectedItem;
 
-        public ObservableCollection<Item> Items { get; }
+		public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(IDbConnectionFactory db)
         {
+			_db = db;
+
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -34,7 +38,7 @@ namespace Xde.App.ViewModels
 
             try
             {
-				var connection = GetDbConnection();
+				var connection = _db.CreateConnection();
 
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
