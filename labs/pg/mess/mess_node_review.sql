@@ -19,4 +19,5 @@ AS $$
         -- TODO: Perf
         random()
     LIMIT 1;
-$$ LANGUAGE sql;
+$$ LANGUAGE sql
+SECURITY DEFINER; --TODO:Deal with security issues
