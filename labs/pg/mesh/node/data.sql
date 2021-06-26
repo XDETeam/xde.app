@@ -47,6 +47,7 @@ VALUES
 )
 ;
 
+/*
 --TODO: Temporary copy from the internal mess table with some drafts
 INSERT INTO mesh.node (
     path,
@@ -59,3 +60,4 @@ FROM
 WHERE
     url IS NOT NULL
 ;
+*/

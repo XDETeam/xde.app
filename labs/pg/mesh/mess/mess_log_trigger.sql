@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION mess_log_trigger()
-    RETURNS TRIGGER
-    LANGUAGE PLPGSQL
+CREATE OR REPLACE FUNCTION mesh.mess_log_trigger()
+RETURNS TRIGGER
+LANGUAGE plpgsql
 AS
 $$
 BEGIN
@@ -15,4 +15,4 @@ CREATE TRIGGER mess_log
     AFTER UPDATE OR INSERT
     ON mess.mesh2
     FOR EACH ROW
-EXECUTE PROCEDURE mess_log_trigger();
+EXECUTE PROCEDURE mesh.mess_log_trigger();

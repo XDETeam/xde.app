@@ -1,10 +1,9 @@
-create function mess_goals_on_update() returns trigger
-    language plpgsql
-as
-$$
+CREATE OR REPLACE FUNCTION mesh.mess_goals_on_update()
+RETURNS trigger
+AS $$
 BEGIN
     UPDATE
-        mesh.mess
+        mess.mess
     SET
         content = NEW.content
     WHERE
@@ -13,7 +12,12 @@ BEGIN
 	
 	RETURN NEW;
 END;
-$$;
+$$ LANGUAGE plpgsql;
 
-alter function mess_goals_on_update() owner to postgres;
-
+CREATE TRIGGER
+    on_update
+INSTEAD OF UPDATE ON
+    mesh.mess_goals
+FOR EACH ROW EXECUTE PROCEDURE
+    mesh.mess_goals_on_update()
+;

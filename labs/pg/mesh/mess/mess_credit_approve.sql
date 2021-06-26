@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE mess.credit_approve(
+CREATE OR REPLACE PROCEDURE mesh.credit_approve(
  _url ltree
 ) AS
 $$

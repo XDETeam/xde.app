@@ -1,7 +1,10 @@
-create function mess_xslt_match(_document xml, _match text, _pattern xml) returns xml
-    language plpgsql
-as
-$$
+CREATE OR REPLACE FUNCTION mesh.mess_xslt_match(
+    _document xml,
+    _match text,
+    _pattern xml
+)
+RETURNS xml
+AS $$
 DECLARE
     _style xml;
 BEGIN
@@ -9,7 +12,7 @@ BEGIN
         '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'
             '<xsl:template match="@*|node()">'
                 '<xsl:copy>'
-                    '<xsl:apply-templates select="@*|node()" />'
+                    '<xsl:apply-templates select="@*|node()"/>'
                 '</xsl:copy>'
             '</xsl:template>'
 
@@ -22,10 +25,7 @@ BEGIN
     );
 
     RETURN xslt_process(_document::text, _style::text);
-END
-$$;
+END $$ LANGUAGE plpgsql;
 
-comment on function mess_xslt_match(xml, text, xml) is 'Applies simple xsl:template (match in _match and body in _patter) to the _document';
-
-alter function mess_xslt_match(xml, text, xml) owner to postgres;
-
+COMMENT ON FUNCTION mesh.mess_xslt_match(_document xml, _match text, _pattern xml)
+    IS 'Applies simple xsl:template (match in _match and body in _patter) to the _document';

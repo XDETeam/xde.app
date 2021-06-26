@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION mess.node_review(
+CREATE OR REPLACE FUNCTION mesh.node_review(
     _filter text = NULL,
     _operator text = '@'
 )

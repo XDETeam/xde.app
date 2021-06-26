@@ -1,9 +1,12 @@
-create procedure mess_drink(_amount integer DEFAULT 400, _at timestamp without time zone DEFAULT timezone('UTC'::text, now()))
-    language sql
-as
+CREATE PROCEDURE mesh.mess_drink(
+	_amount integer DEFAULT 400,
+	_at timestamp without time zone DEFAULT timezone('UTC'::text, now())
+)
+LANGUAGE sql
+AS
 $$
-UPDATE
-        mesh.mess
+	UPDATE
+        mess.mess
     SET
         data = jsonb_insert(
             data,
@@ -14,6 +17,3 @@ UPDATE
         id = 'stan.body.water'
     ;
 $$;
-
-alter procedure mess_drink(integer, timestamp) owner to postgres;
-

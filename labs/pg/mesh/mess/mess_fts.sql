@@ -1,15 +1,11 @@
-create function mess_fts(_query text) returns SETOF mesh.mess
-    language sql
-as
-$$
-SELECT
+CREATE OR REPLACE FUNCTION mesh.mess_fts(_query text)
+RETURNS SETOF mess.mess
+AS $$
+    SELECT
         *
     FROM
-        mesh.mess
+        mess.mess
     WHERE
         mess.content::text %> _query
     ;
-$$;
-
-alter function mess_fts(text) owner to postgres;
-
+$$ LANGUAGE sql;

@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE mess.session_set(
+CREATE OR REPLACE PROCEDURE mesh.session_set(
     _sid text
 )
 AS $$

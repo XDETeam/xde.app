@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION mess.session_get()
+CREATE OR REPLACE FUNCTION mesh.session_get()
 RETURNS text
 AS $$
 DECLARE _sid text;

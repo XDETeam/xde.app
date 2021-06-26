@@ -1,16 +1,12 @@
-create procedure mess_dump_from(_filename text)
-    language plpgsql
-as
-$$
+CREATE OR REPLACE PROCEDURE mesh.mess_dump_from(
+    _filename text
+)
+AS $$
 BEGIN
-    TRUNCATE mesh.mess;
+    TRUNCATE mess.mess;
 
     EXECUTE format(
-        'COPY mesh.mess FROM %L CSV HEADER',
+        'COPY mess.mess FROM %L CSV HEADER',
         _filename
     );
-END
-$$;
-
-alter procedure mess_dump_from(text) owner to postgres;
-
+END $$ LANGUAGE plpgsql;

@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION mess_version_guard_trigger()
-    RETURNS TRIGGER
-    LANGUAGE PLPGSQL
+CREATE OR REPLACE FUNCTION mesh.mess_version_guard_trigger()
+RETURNS TRIGGER
+LANGUAGE PLPGSQL
 AS
 $$
 BEGIN
@@ -18,4 +18,4 @@ CREATE TRIGGER mess_version_guard
     BEFORE UPDATE
     ON mess.mesh2
     FOR EACH ROW
-EXECUTE PROCEDURE mess_version_guard_trigger();
+EXECUTE PROCEDURE mesh.mess_version_guard_trigger();
