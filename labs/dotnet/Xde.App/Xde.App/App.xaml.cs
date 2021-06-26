@@ -18,14 +18,14 @@ namespace Xde.App
 
 			services.AddTransient<IDataStore<Item>, MockDataStore>();
 
-			services.AddSingleton<PgSettings>();
+			services.AddSingleton<IAppSettings, SecureStorageAppSettings>();
 			services.AddSingleton<IDbConnectionFactory, PgConnectionFactory>();
 
 			services.AddTransient<ItemsViewModel>();
+			services.AddTransient<NodeReviewViewModel>();
+			services.AddTransient<ViewModels.Settings.MainViewModel>();
 
 			ServiceProvider = services.BuildServiceProvider();
-
-			var test = ServiceProvider.GetService<ItemsViewModel>();//TODO:0
 
 			DependencyResolver.ResolveUsing(type => ServiceProvider.GetService(type));
 			DependencyResolver.ResolveUsing((type, dependencies) => ServiceProvider.GetService(type));
