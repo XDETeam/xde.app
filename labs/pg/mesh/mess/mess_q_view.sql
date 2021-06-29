@@ -1,8 +1,8 @@
-CREATE VIEW mesh.q_view
+CREATE OR REPLACE VIEW mesh.mess_q_view
 AS SELECT
-	url,
+	mess.id,
 	xt.content
 FROM
-    mess.mesh,
+    mess.mess,
     XMLTABLE('//q[not(ancestor::story)]' PASSING content COLUMNS "content" XML PATH 'node()') xt
 ;

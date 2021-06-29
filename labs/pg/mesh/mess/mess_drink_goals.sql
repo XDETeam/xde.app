@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_drink_goals
+CREATE OR REPLACE VIEW mesh.mess_drink_goals
 AS SELECT
 	drink.at::date AS at,
 	SUM(drink.amount)::numeric / 2000.0 AS value,

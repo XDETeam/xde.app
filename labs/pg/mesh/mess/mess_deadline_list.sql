@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_deadline_list
+CREATE OR REPLACE VIEW mesh.mess_deadline_list
 AS SELECT
 	deadline.at,
 	mess.id,

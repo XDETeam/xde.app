@@ -4,7 +4,7 @@ CREATE OR REPLACE PROCEDURE mesh.mess_dump_to(
 AS $$
 BEGIN
     EXECUTE format(
-        'COPY (SELECT * FROM mess.mess ORDER BY id) TO %L CSV HEADER',
+        'COPY (SELECT * FROM mess.node ORDER BY id) TO %L CSV HEADER',
         _filename
     );
 END $$ LANGUAGE plpgsql;

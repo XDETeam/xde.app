@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_depends_list
+CREATE OR REPLACE VIEW mesh.mess_depends_list
 AS SELECT
 	depends."on" AS id,
 	(SELECT content FROM mess.mess WHERE id=depends."on") AS content,

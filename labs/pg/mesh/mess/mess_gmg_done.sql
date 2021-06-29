@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_gmg_done
+CREATE OR REPLACE VIEW mesh.mess_gmg_done
 AS
 SELECT
 	done.at,

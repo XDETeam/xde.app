@@ -1,4 +1,4 @@
-CREATE PROCEDURE mesh.mess_drink(
+CREATE OR REPLACE PROCEDURE mesh.mess_drink(
 	_amount integer DEFAULT 400,
 	_at timestamp without time zone DEFAULT timezone('UTC'::text, now())
 )
