@@ -11,10 +11,9 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir node/node_web_publish.sql
 \ir node/data.sql
 
-\ir mess/mess_log_trigger.sql
-\ir mess/mess_version_guard_trigger.sql
 \ir mess/mess_session_get.sql
 \ir mess/mess_session_set.sql
+
 \ir mess/mess_node_view.sql
 \ir mess/mess_node_view_change.sql
 \ir mess/mess_node_view_change_trigger.sql
