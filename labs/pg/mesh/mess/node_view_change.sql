@@ -15,14 +15,14 @@ BEGIN
             mess.node(id, url, content, version)
         VALUES
            (DEFAULT, NEW.url, NEW.content, DEFAULT)
-       RETURNING
+        RETURNING
             id, version INTO __id, __version
        ;
 
         INSERT INTO mess.log
-            (id, version, author, url, content)
+            (id, created, version, author, url, content, notes)
         VALUES
-            (__id, __version, mesh.session_get(), NEW.url, NEW.content)
+            (__id, DEFAULT, __version, mesh.session_get(), NEW.url, NEW.content, NEW.notes)
         ;
 
         RETURN NEW;
@@ -31,19 +31,29 @@ BEGIN
             RAISE EXCEPTION 'Version conflict. You are attempting to update node "%" with version %, but the actual version is %', NEW.url, NEW.version, OLD.version;
         END IF;
 
-        UPDATE
-            mess.node
-        SET
-            url = NEW.url,
-            content = NEW.content
-        WHERE
-            id = OLD.id
-        ;
+        IF NEW.content IS NOT NULL THEN
+            UPDATE
+                mess.node
+            SET
+                url = NEW.url,
+                content = NEW.content,
+                version = OLD.version + 1
+            WHERE
+                id = OLD.id
+            ;
+        ELSE
+            DELETE
+            FROM
+                 mess.node
+            WHERE
+                id = OLD.id
+            ;
+        END IF;
 
         INSERT INTO mess.log
-            (id, version, author, url, content)
+            (id, created, version, author, url, content, notes)
         VALUES
-            (OLD.id, NEW.version + 1, mesh.session_get(), NEW.url, NEW.content)
+            (OLD.id, DEFAULT, OLD.version + 1, mesh.session_get(), NEW.url, NEW.content, NEW.notes)
         ;
 
         RETURN NEW;
@@ -62,9 +72,9 @@ BEGIN
         RAISE NOTICE 'DELETE OLD:% NEW:% V:%', OLD.id, NEW.id, __version;
 
         INSERT INTO mess.log
-            (id, version, author, url, content)
+            (id, created, version, author, url, content)
         VALUES
-            (OLD.id, __version + 1, mesh.session_get(), OLD.url, NULL)
+            (OLD.id, DEFAULT, __version + 1, mesh.session_get(), OLD.url, NULL)
         ;
 
         RETURN NULL;
