@@ -15,6 +15,9 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir mess/mess_version_guard_trigger.sql
 \ir mess/mess_session_get.sql
 \ir mess/mess_session_set.sql
+\ir mess/mess_node_view.sql
+\ir mess/mess_node_view_change.sql
+\ir mess/mess_node_view_change_trigger.sql
 
 \ir mess/mess_anki_list.sql
 \ir mess/mess_balance_list.sql
