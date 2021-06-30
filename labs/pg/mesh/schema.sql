@@ -24,6 +24,8 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir mess/node_dump_to.sql
 \ir mess/node_review.sql
 
+\ir mess/balance_list.sql
+
 \ir mess/mess_anki_list.sql
 \ir mess/mess_balance_list.sql
 \ir mess/mess_burpee1.sql
