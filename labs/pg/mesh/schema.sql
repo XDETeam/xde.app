@@ -25,6 +25,7 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir mess/node_review.sql
 
 \ir mess/balance_list.sql
+\ir mess/balance_total.sql
 \ir mess/balance_invoice.sql
 
 \ir mess/mess_anki_list.sql
