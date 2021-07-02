@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_gmg_invoice
+CREATE OR REPLACE VIEW mesh.mess_gmg_invoice
 AS SELECT
 	to_char(mess_gmg_done_days.date::timestamp with time zone, 'dd.MM.yyyy'::text) AS date,
 	mess_gmg_done_days.tasks,

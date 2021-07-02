@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_burpee_stats
+CREATE OR REPLACE VIEW mesh.mess_burpee_stats
 AS
 SELECT
 	tabata.at,

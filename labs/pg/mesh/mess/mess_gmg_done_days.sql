@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_gmg_done_days
+CREATE OR REPLACE VIEW mesh.mess_gmg_done_days
 AS
 WITH cte AS (
     SELECT

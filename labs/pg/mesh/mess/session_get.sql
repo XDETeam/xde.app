@@ -4,11 +4,12 @@ AS $$
 DECLARE _sid text;
 BEGIN
 	BEGIN
-        SELECT current_setting('mess.sid') INTO _sid;
+        SELECT 'sid:' || current_setting('mess.sid') INTO _sid;
     EXCEPTION
         WHEN SQLSTATE '42704' THEN
-            RETURN NULL;
+            RETURN 'user:' || current_user;
     END;
+
     RETURN _sid;
 END
 $$ LANGUAGE PLPGSQL;

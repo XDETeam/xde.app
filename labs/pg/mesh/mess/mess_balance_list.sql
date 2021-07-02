@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_balance_list AS
+CREATE OR REPLACE VIEW mesh.mess_balance_list AS
 SELECT
     mess.id,
     -debit.amount,

@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_tags
+CREATE OR REPLACE VIEW mesh.mess_tags
 AS
 SELECT
 	mess.id,
