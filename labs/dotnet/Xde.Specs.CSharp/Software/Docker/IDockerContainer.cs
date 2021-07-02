@@ -8,7 +8,7 @@ namespace Xde.Software.Docker
 	/// TODO: https://docs.docker.com/get-started/overview/
 	/// A container is a runnable instance of an image.
 	/// </remarks>
-	public interface IDockerImage
+	public interface IDockerContainer
 	{
 		/// <summary>
 		/// Container ID
