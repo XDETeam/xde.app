@@ -50,10 +50,23 @@ BEGIN
             ;
         END IF;
 
-        INSERT INTO mess.log
-            (id, created, version, author, url, content, notes)
-        VALUES
-            (OLD.id, DEFAULT, OLD.version + 1, mesh.session_get(), NEW.url, NEW.content, NEW.notes)
+        INSERT INTO mess.log (
+            id,
+            version,
+            author,
+            url,
+            content,
+            notes
+        ) SELECT
+            OLD.id,
+            OLD.version + 1,
+            mesh.session_get(),
+            NEW.url,
+            NEW.content,
+            CASE
+                WHEN NEW.notes::text = OLD.notes::text THEN NULL
+                ELSE NEW.notes
+            END
         ;
 
         RETURN NEW;
