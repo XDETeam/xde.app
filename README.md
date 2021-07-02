@@ -1,9 +1,10 @@
+TODO:
+
 This is a "do everything" application. Such ambitious goal intends to research
 and probably break some software design habits and solutions. To find a "mesh"
-between different domains. It is not about rewriting or assemblying a lot of
-existing code into the single app.
+between different domains and fulfill the most demanding requirements. It is not
+about rewriting or assemblying a lot of existing code into the single app.
 
-TODO:
 
 ## Environment
 
