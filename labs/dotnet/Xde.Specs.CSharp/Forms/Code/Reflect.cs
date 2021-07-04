@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Xde.Forms.Code
@@ -10,8 +11,16 @@ namespace Xde.Forms.Code
 	{
 		private static readonly Reflect Current = new();
 
+		/// TODO:Temporary class for extended type information. Maybe temporary...
+		public class TypeInfo
+		{
+			public Type Type { get; set; }
+			public string Namespace { get; set;}
+			public bool CanNew { get; set;}
+		}
+
 		public interface IFilter
-			: IEnumerable<Type>
+			: IEnumerable<TypeInfo>
 		{
 
 		}
@@ -19,18 +28,29 @@ namespace Xde.Forms.Code
 		private class Filter
 			: IFilter
 		{
+			private readonly System.Collections.Generic.GrowableArray _assembly;
+
 			public Filter(Assembly assembly)
 			{
-
+				_assembly = assembly;
 			}
 
-			IEnumerator<Type> IEnumerable<Type>.GetEnumerator()
+			IEnumerator<TypeInfo> IEnumerable<TypeInfo>.GetEnumerator()
 			{
-				throw new NotImplementedException();
+				return _assembly
+					.GetTypes()
+					.Select(type => new TypeInfo
+					{
+						Type = type,
+						CanNew = CanNew(type),
+						Namespace = type.Namespace
+					})
+					.GetEnumerator()
+				;
 			}
 
 			IEnumerator IEnumerable.GetEnumerator()
-				=> (this as IEnumerable<Type>).GetEnumerator()
+				=> (this as IEnumerable<TypeInfo>).GetEnumerator()
 			;
 		}
 
