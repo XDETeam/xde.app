@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_location_list
+CREATE OR REPLACE VIEW mesh.mess_location_list
 AS
 SELECT
 	location.at AS location,

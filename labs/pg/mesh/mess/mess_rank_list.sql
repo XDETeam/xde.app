@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_rank_list
+CREATE OR REPLACE VIEW mesh.mess_rank_list
 AS SELECT
 	rank.index,
 	mess.id,

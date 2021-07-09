@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_scales_stats
+CREATE OR REPLACE VIEW mesh.mess_scales_stats
 AS
 SELECT
 	scales.at,

@@ -1,5 +1,6 @@
-CREATE VIEW mesh.mess_goals
-AS SELECT
+CREATE OR REPLACE VIEW mesh.mess_goals
+AS
+SELECT
 	'stan.body.water'::text AS goal,
     (mess_drink_goals.value * 100)::integer::text || '%'::text AS targets,
     'Выпить воды'::text AS notes,

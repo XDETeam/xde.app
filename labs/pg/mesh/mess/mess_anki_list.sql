@@ -1,4 +1,4 @@
-CREATE VIEW mesh.mess_anki_list AS
+CREATE OR REPLACE VIEW mesh.mess_anki_list AS
 SELECT
     mess.id,
     anki.question,

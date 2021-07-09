@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW mesh.mess_scheme_tags
 AS SELECT
     tag.*,
-    mess.id
+    mess.url
 FROM
     mess.mess,
     LATERAL XMLTABLE(
