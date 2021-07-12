@@ -4,6 +4,7 @@ RETURNS TABLE (
     day date,
     tasks text,
     unit text,
+    cost numeric,
     lot numeric,
     value numeric
 )
@@ -14,9 +15,10 @@ SELECT
     "on",
     string_agg(title || '.', ' '),
     unit,
+    cost,
     sum(lot),
     sum(value)
-from
+FROM
      mesh.balance_list
 WHERE
     "to" ~ (_url || '.*')::lquery
@@ -24,7 +26,8 @@ WHERE
 GROUP BY
     overlay("to"::text placing '' from 1 for length(_url) + 1),
     "on",
-    unit
+    unit,
+    cost
 ORDER BY
     chapter,
     "on"
