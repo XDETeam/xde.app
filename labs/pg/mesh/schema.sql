@@ -6,6 +6,7 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 
 \ir http/http_get.sql
 
+\ir mess/xml_expand.sql
 \ir mess/xslt_match.sql
 
 \ir node/node.sql
@@ -28,6 +29,7 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir mess/balance_total.sql
 \ir mess/balance_invoice.sql
 \ir mess/balance_invoice_report.sql
+\ir mess/balance_invoice_format.sql
 
 \ir mess/mess_anki_list.sql
 \ir mess/mess_balance_list.sql
