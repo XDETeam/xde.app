@@ -4,6 +4,7 @@ returns table (
     node ltree,
     url ltree,
     title text,
+    win int,
     level int,
     content xml
 )
@@ -38,7 +39,8 @@ with recursive flatten as (
         parent.id,
         parent.url as node,
         parent.url || child.path as url,
-        (xpath('/*/@for', child.content))[1] as title,
+        (xpath('/*/@for', child.content))[1]::text as title,
+        (xpath('/*/@win', child.content))[1]::text::int as win,
         parent.level + child.level as level,
         child.content as content
     from
