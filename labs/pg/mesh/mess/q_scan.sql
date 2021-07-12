@@ -1,5 +1,7 @@
 create or replace function mesh.q_scan(_url lquery)
 returns table (
+    id bigint,
+    node ltree,
     url ltree,
     title text,
     level int,
@@ -9,6 +11,7 @@ language sql
 as $$
 with recursive flatten as (
     select
+        id,
         url,
         content,
         0 as level
@@ -18,6 +21,7 @@ with recursive flatten as (
         url ~ _url
 
     union all select
+        child.id,
         child.url,
         child.content,
         parent.level + 1 as level
@@ -30,7 +34,9 @@ with recursive flatten as (
 )
 ,quests as (
     select
-        parent.url || child.path   as url,
+        parent.id,
+        parent.url as node,
+        parent.url || child.path as url,
         (xpath('/*/@for', child.content))[1] as title,
         parent.level + child.level as level,
         child.content as content
