@@ -26,6 +26,7 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 \ir mess/node_review.sql
 
 \ir mess/q_scan.sql
+\ir mess/q_all.sql
 \ir mess/q_my.sql
 
 \ir mess/balance_list.sql

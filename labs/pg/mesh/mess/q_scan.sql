@@ -18,7 +18,8 @@ with recursive flatten as (
     from
         mesh.node_view
     where
-        url ~ _url
+        (_url is not null and url ~ _url)
+        or (_url is null and nlevel(url) = 1)
 
     union all select
         child.id,
