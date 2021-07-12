@@ -20,7 +20,18 @@ with recursive flatten as (
         mesh.node_view
     where
         (_url is not null and url ~ _url)
-        or (_url is null and nlevel(url) = 1)
+        or (
+            _url is null
+            and not exists(
+                select
+                    *
+                from
+                    mesh.node_view as parents
+                where
+                    parents.url @> node_view.url
+                    and parents.url != node_view.url
+            )
+        )
 
     union all select
         child.id,
