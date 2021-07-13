@@ -5,6 +5,8 @@ returns table (
     url ltree,
     title text,
     win int,
+    deadline int,
+    leaf boolean,
     level int,
     content xml
 )
@@ -52,6 +54,8 @@ with recursive flatten as (
         parent.url || child.path as url,
         (xpath('/*/@for', child.content))[1]::text as title,
         (xpath('/*/@win', child.content))[1]::text::int as win,
+        (xpath('/*/@start', child.content))[1]::text::timestamp as start,
+        (xpath('/*/@end', child.content))[1]::text::timestamp as end,
         parent.level + child.level as level,
         child.content as content
     from
@@ -61,10 +65,33 @@ with recursive flatten as (
       child.dom = 'q'
 )
 select
-    *
-from
-    quests
-where
+    id,
+    node,
+    url,
+    title,
+    win,
+    case
+        when "end" is null then case
+            when start is not null then 666
+            else null
+        end
+        else case
+            when start is null then case
+                when "end" < current_timestamp then 100
+                else null
+            end
+            else case
+                when start > "end" then 667
+                when current_timestamp not between start and "end" then null
+                when current_timestamp > "end" then 100
+                else (
+                    EXTRACT(epoch FROM current_timestamp - start)
+                    / EXTRACT(epoch FROM "end" - start)
+                    * 100
+                )::int
+            end
+        end
+    end as deadline,
     not exists(
         select
            *
@@ -73,5 +100,9 @@ where
         where
             chidren.url <@ quests.url
             and chidren.url != quests.url
-    )
+    ) as leaf,
+    level,
+    content
+from
+    quests
 $$;
