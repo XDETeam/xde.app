@@ -9,6 +9,7 @@ returns table (
     title text,
     win int,
     deadline int,
+    term text,
     leaf boolean,
     level int,
     content xml
@@ -59,6 +60,7 @@ with recursive flatten as (
         (xpath('/*/@win', child.content))[1]::text::int as win,
         (xpath('/*/@start', child.content))[1]::text::timestamp as start,
         (xpath('/*/@end', child.content))[1]::text::timestamp as end,
+        (xpath('/*/@term', child.content))[1]::text as term,
         parent.level + child.level as level,
         child.content as content
     from
@@ -95,6 +97,7 @@ select
             end
         end
     end as deadline,
+    term,
     not exists(
         select
            *
