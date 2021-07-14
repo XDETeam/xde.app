@@ -1,4 +1,7 @@
-create or replace function mesh.q_scan(_url lquery)
+create or replace function mesh.q_scan(
+    _url lquery = null,
+    _date timestamp = current_timestamp
+)
 returns table (
     id bigint,
     node ltree,
@@ -77,15 +80,15 @@ select
         end
         else case
             when start is null then case
-                when "end" < current_timestamp then 100
+                when "end" < _date then 100
                 else null
             end
             else case
                 when start > "end" then 667
-                when current_timestamp not between start and "end" then null
-                when current_timestamp > "end" then 100
+                when _date not between start and "end" then null
+                when _date > "end" then 100
                 else (
-                    EXTRACT(epoch FROM current_timestamp - start)
+                    EXTRACT(epoch FROM _date - start)
                     / EXTRACT(epoch FROM "end" - start)
                     * 100
                 )::int
