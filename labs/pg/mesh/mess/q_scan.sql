@@ -87,8 +87,8 @@ select
             end
             else case
                 when start > "end" then 667
-                when _date not between start and "end" then null
                 when _date > "end" then 100
+                when _date not between start and "end" then null
                 else (
                     EXTRACT(epoch FROM _date - start)
                     / EXTRACT(epoch FROM "end" - start)
