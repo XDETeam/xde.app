@@ -23,6 +23,7 @@ namespace Xde.App
 			services.AddSingleton<IDbConnectionFactory, PgConnectionFactory>();
 
 			services.AddSingleton<ISpinService, SimpleSpinService>();
+			services.AddTransient<ViewModels.Spins.MainViewModel>();
 
 			services.AddTransient<ItemsViewModel>();
 			services.AddTransient<NodeReviewViewModel>();
