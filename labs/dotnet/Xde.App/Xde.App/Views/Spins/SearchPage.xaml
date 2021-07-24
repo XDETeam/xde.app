@@ -8,9 +8,55 @@
 	</ContentPage.ToolbarItems>
 	
     <ContentPage.Content>
-        <StackLayout>
-			<SearchBar />
+		<StackLayout VerticalOptions="End">
+			<ScrollView Grid.Row="0">
+				<ListView
+					x:Name="listView"
+					ItemsSource="{Binding .}"
+				/>
+			</ScrollView>
+
+			<SearchBar Placeholder="Spin URL..." />
+
+			<StackLayout
+				Orientation="Horizontal"
+				HorizontalOptions="FillAndExpand"
+				Padding="10"
+				>
+
+				<Button Text="Cancel" HorizontalOptions="FillAndExpand" />
+				<Button Text="Create" HorizontalOptions="FillAndExpand" />				
+			</StackLayout>
 		</StackLayout>
-    </ContentPage.Content>
+
+		<!--<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<ScrollView Grid.Row="0">
+				--><!--TODO: ItemTapped="OnItemTapped"--><!--
+				<ListView
+					x:Name="listView"
+					ItemsSource="{Binding .}"
+				/>
+			</ScrollView>
+
+			<StackLayout Grid.Row="1">
+				<SearchBar Placeholder="Spin URL..." />
+				
+				<StackLayout
+					Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+					Padding="10"
+					>
+
+					<Button Text="Create" HorizontalOptions="FillAndExpand" />
+					<Button Text="Cancel" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+			</StackLayout>
+		</Grid>-->
+	</ContentPage.Content>
 </ContentPage>
 	
