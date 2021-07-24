@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,5 +31,5 @@
     <EmbeddedResource Update="Views\Spins\SearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
+	</ItemGroup>
 </Project>

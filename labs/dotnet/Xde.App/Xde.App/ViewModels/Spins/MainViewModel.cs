@@ -9,7 +9,7 @@ namespace Xde.App.ViewModels.Spins
 	//TODO:public class MainViewModel : BaseViewModel
 	public class MainViewModel : ReactiveObject
 	{
-		public ISpinService Spins { get; private set; }
+		public ISpinService Spins { get; init; }
 
 		public ICommand SearchCommand { get; }
 
