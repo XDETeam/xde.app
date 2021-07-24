@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Spins\MainPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Views\WaterPage.xaml.cs">
       <DependentUpon>WaterPage.xaml</DependentUpon>
     </Compile>

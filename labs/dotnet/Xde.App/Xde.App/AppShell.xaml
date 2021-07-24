@@ -2,6 +2,8 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Xde.App.Views"
+	   xmlns:settings="clr-namespace:Xde.App.Views.Settings"
+	   xmlns:spins="clr-namespace:Xde.App.Views.Spins"
        Title="Xde.App"
        x:Class="Xde.App.AppShell">
 
@@ -88,9 +90,19 @@
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
-	<FlyoutItem Title="Settings">
-		<ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:Settings.MainPage}" />
+	<FlyoutItem Title="Spins">
+		<ShellContent Route="MainPage" ContentTemplate="{DataTemplate spins:MainPage}" />
 	</FlyoutItem>
+
+	<MenuItem>
+		<Shell.MenuItemTemplate>
+			<DataTemplate>
+				<Label HeightRequest="1" BackgroundColor="#eee"/>
+			</DataTemplate>
+		</Shell.MenuItemTemplate>
+	</MenuItem>
+
+	<ShellContent Title="Settings" Route="MainPage" ContentTemplate="{DataTemplate settings:MainPage}" />
 
 	<!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
