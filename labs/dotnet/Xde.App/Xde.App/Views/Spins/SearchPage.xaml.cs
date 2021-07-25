@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xde.App.ViewModels.Spins;
@@ -19,10 +18,7 @@ namespace Xde.App.Views.Spins
 			_mainViewModel = mainViewModel;
 			_viewModel = new SearchViewModel(_mainViewModel);
 
-			listView.ItemsSource = Enumerable
-				.Range(1, 25)
-				.Select(index => $"url-{index}")
-			;
+			listView.ItemsSource = _mainViewModel.Spins.Search(searchBar.Text);
 
 			listView.ItemTapped += async (sender, e) =>
 			{

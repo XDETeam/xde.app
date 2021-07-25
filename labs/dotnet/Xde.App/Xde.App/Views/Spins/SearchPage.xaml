@@ -16,7 +16,7 @@
 				/>
 			</ScrollView>
 
-			<SearchBar Placeholder="Spin URL..." />
+			<SearchBar x:Name="searchBar"  Placeholder="Spin URL..." />
 
 			<StackLayout
 				Orientation="Horizontal"
