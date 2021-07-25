@@ -1,6 +1,6 @@
 create or replace procedure mesh.spin_do(
     _url text,
-    _content text = null
+    _content xml = null
 )
 language plpgsql
 as $$

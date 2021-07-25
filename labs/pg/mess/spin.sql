@@ -3,7 +3,7 @@ create table mess.spin (
     chain bigint null,
     author text not null,
     url text not null,
-    content text null,
+    content xml null,
     visited timestamp not null
 );
 
