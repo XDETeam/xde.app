@@ -58,3 +58,5 @@ CREATE SCHEMA IF NOT EXISTS mesh;
 
 \ir mess/mess_goals.sql
 \ir mess/mess_goals_on_update.sql
+
+\ir mess/link_view.sql
