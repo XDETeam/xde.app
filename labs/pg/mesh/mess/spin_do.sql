@@ -6,6 +6,7 @@ language plpgsql
 as $$
 declare
     __existing bigint;
+    __spin bigint;
     __author text = current_user;
     __now timestamp = current_timestamp;
 begin
@@ -16,7 +17,25 @@ begin
     from
         mess.spin
     where
-        author = __author
+        profile = __author
+        and spin is null
+    ;
+
+    raise notice 'Do for %', __existing;
+
+    -- Open new spin
+    insert into mess.spin(
+        profile,
+        url,
+        visited
+    ) values (
+        __author,
+        _url::ltree,
+        __now
+    ) returning
+        id
+    into
+        __spin
     ;
 
     -- Close existing spin
@@ -24,22 +43,10 @@ begin
         update
             mess.spin
         set
-            content = _content
+            content = _content,
+            spin = __spin
         where
             id = __existing
         ;
     end if;
-
-    -- Open new spin
-    insert into mess.spin(
-        chain,
-        author,
-        url,
-        visited
-    ) values (
-        __existing,
-        __author,
-        _url,
-        __now
-    );
 end $$;

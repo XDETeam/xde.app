@@ -1,16 +1,16 @@
 create or replace view mesh.spin_plan
 as select
-    current.url,
-    current.content,
+    url,
+    null::text as spin,
+    content,
     --TODO:The rest of field are output for debugging purposes
     '--' as remove,
-    current.id,
-    current.chain,
-    current.visited
+    id,
+    visited,
+    spin as spin_id
 from
-    mess.spin as current
-    left outer join mess.spin as next on (next.chain = current.id)
+    mess.spin
 where
-    current.author = current_user
-    and next.id is null
+    profile = current_user
+    and spin is null
 ;
