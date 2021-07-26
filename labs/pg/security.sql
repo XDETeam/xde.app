@@ -1,3 +1,4 @@
+/*TODO:
 -- Revoking from public
 REVOKE ALL ON DATABASE xde FROM PUBLIC;
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
@@ -29,3 +30,4 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public, mess, mesh GRANT ALL PRIVILEGES ON FU
 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public, mess, mesh TO admins;
 
 GRANT admins TO yavulan;
+*/

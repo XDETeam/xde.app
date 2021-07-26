@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xde.App.Models;
 using Xde.App.Services;
+using Xde.App.Services.Spins;
 using Xde.App.ViewModels;
 
 namespace Xde.App
@@ -20,6 +21,9 @@ namespace Xde.App
 
 			services.AddSingleton<IAppSettings, SecureStorageAppSettings>();
 			services.AddSingleton<IDbConnectionFactory, PgConnectionFactory>();
+
+			services.AddSingleton<ISpinService, SimpleSpinService>();
+			services.AddTransient<ViewModels.Spins.MainViewModel>();
 
 			services.AddTransient<ItemsViewModel>();
 			services.AddTransient<NodeReviewViewModel>();

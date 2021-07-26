@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xde.App.Views.Spins.SearchPage">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
+	</ContentPage.ToolbarItems>
+	
+    <ContentPage.Content>
+		<StackLayout VerticalOptions="End">
+			<ScrollView Grid.Row="0">
+				<ListView
+					x:Name="listView"
+					ItemsSource="{Binding .}"
+				/>
+			</ScrollView>
+
+			<SearchBar x:Name="searchBar"  Placeholder="Spin URL..." />
+
+			<StackLayout
+				Orientation="Horizontal"
+				HorizontalOptions="FillAndExpand"
+				Padding="10"
+				>
+
+				<Button Text="Cancel" HorizontalOptions="FillAndExpand" />
+				<Button Text="Create" HorizontalOptions="FillAndExpand" />				
+			</StackLayout>
+		</StackLayout>
+
+		<!--<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<ScrollView Grid.Row="0">
+				--><!--TODO: ItemTapped="OnItemTapped"--><!--
+				<ListView
+					x:Name="listView"
+					ItemsSource="{Binding .}"
+				/>
+			</ScrollView>
+
+			<StackLayout Grid.Row="1">
+				<SearchBar Placeholder="Spin URL..." />
+				
+				<StackLayout
+					Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+					Padding="10"
+					>
+
+					<Button Text="Create" HorizontalOptions="FillAndExpand" />
+					<Button Text="Cancel" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+			</StackLayout>
+		</Grid>-->
+	</ContentPage.Content>
+</ContentPage>
+	

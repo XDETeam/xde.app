@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xde.App.Services;
@@ -42,6 +43,8 @@ namespace Xde.App.ViewModels.Settings
 		private async void UpdateHandler(object obj)
 		{
 			_settings.ConnectionString = ConnectionString;
+
+			await Task.CompletedTask;
 		}
 
 		public const string DefaultConnectionString = "Host=my-server;Port=16328;Username=xde_app;Password=!qa2Ws3eD;Database=xde";
