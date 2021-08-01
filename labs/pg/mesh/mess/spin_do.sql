@@ -1,15 +1,33 @@
 create or replace procedure mesh.spin_do(
     _url text,
-    _content xml = null
+    _content xml = null,
+    _now timestamp = current_timestamp
 )
 language plpgsql
 as $$
 declare
-    __existing bigint;
-    __spin bigint;
-    __author text = current_user;
-    __now timestamp = current_timestamp;
+    __existing int;
+    __spin int;
+    __author int;
+    __url int;
 begin
+    select
+        id
+    into
+        __author
+    from
+         mess.profile
+    where
+        name = current_user
+    ;
+
+    if __author is null then
+        raise 'Profile % not found', current_user using
+            errcode = '0A000',
+            hint = 'User should be registered in the mess.profile table'
+        ;
+    end if;
+
     select
         id
     into
@@ -21,7 +39,19 @@ begin
         and spin is null
     ;
 
-    raise notice 'Do for %', __existing;
+    select
+        id
+    into
+        __url
+    from
+        mess.url
+    where
+        url = _url::ltree
+    ;
+
+    if __url is null then
+        insert into mess.url (url) values (_url::ltree) returning id into __url;
+    end if;
 
     -- Open new spin
     insert into mess.spin(
@@ -30,8 +60,8 @@ begin
         visited
     ) values (
         __author,
-        _url::ltree,
-        __now
+        __url,
+        _now
     ) returning
         id
     into

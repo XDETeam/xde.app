@@ -1,16 +1,29 @@
 create or replace view mesh.spin_plan
 as select
-    url,
+    spin.url,
     null::text as spin,
-    content,
+    (
+        select
+            last.content
+        from
+            mess.spin as last
+        where
+            last.url = spin.url
+            and last.id != spin.id
+            and last.content is not null
+        order by
+            spin.visited desc
+        limit
+            1
+    ) as content,
     --TODO:The rest of field are output for debugging purposes
     '--' as remove,
-    id,
-    visited,
-    spin as spin_id
+    spin.id,
+    spin.visited,
+    spin.spin as spin_id
 from
     mess.spin
 where
-    profile = current_user
-    and spin is null
+    spin.profile = current_user
+    and spin.spin is null
 ;
