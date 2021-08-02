@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -15,6 +15,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+		<PackageReference Include="Autofac" Version="6.2.0" />
+		<PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+		<PackageReference Include="Docker.DotNet" Version="3.125.4" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
 		  <PrivateAssets>all</PrivateAssets>
@@ -26,6 +29,7 @@
 	  <Folder Include="Code\Composition\" />
 	  <Folder Include="Code\Application\" />
 	  <Folder Include="Code\Grammar\" />
+	  <Folder Include="Software\Microsoft\DotNet\" />
 	</ItemGroup>
 
 </Project>
