@@ -28,7 +28,7 @@ namespace Xde.Forms.Code
 		private class Filter
 			: IFilter
 		{
-			private readonly System.Collections.Generic.GrowableArray _assembly;
+			private readonly Assembly _assembly;
 
 			public Filter(Assembly assembly)
 			{
