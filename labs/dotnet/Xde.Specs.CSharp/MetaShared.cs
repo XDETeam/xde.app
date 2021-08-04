@@ -1,5 +1,7 @@
 using System.Reflection;
 
+// TODO: How is it better to move this data to Xde.Meta
+
 // TODO:Provide shared information
 // TODO:Share this meta. Looks like it should be in some Core/Origo/Shared/... assembly,
 // that will be referenced by all others. Later we can define the best practices for its
