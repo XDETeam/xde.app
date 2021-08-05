@@ -1,7 +1,10 @@
 using System;
 using System.Reflection;
+using Xde.App;
 
 Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
+
+AppOptions.Process(args);
 
 /*
  * - Есть раздел Security | Account
