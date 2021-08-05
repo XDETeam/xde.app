@@ -1,5 +1,6 @@
-using System;
 using CommandLine;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Xde.App
 {
@@ -16,7 +17,17 @@ namespace Xde.App
 
 		public void Execute(Options options)
 		{
-			Console.WriteLine(options.Test);
+			Host
+				.CreateDefaultBuilder()
+				.ConfigureWebHostDefaults(builder =>
+				{
+					builder
+						.UseKestrel()
+						.UseStartup<WebDavStartup>()
+					;
+				})
+				.Start()
+			;
 		}
 	}
 }
