@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Xde.App
 {
+	//TODO:http://www.webdav.org/specs/rfc4918.pdf
 	public class WebDavMiddleware
 	{
 		private readonly RequestDelegate _next;
