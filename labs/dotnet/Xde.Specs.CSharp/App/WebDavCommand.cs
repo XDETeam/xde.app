@@ -22,7 +22,7 @@ namespace Xde.App
 				.ConfigureWebHostDefaults(builder =>
 				{
 					builder
-						.UseKestrel()
+						//TODO:.UseKestrel()
 						.UseStartup<WebDavStartup>()
 					;
 				})
