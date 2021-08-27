@@ -7,6 +7,8 @@ namespace Xde.Software
 	/// </summary>
 	/// 
 	/// <remarks>
+	/// TODO:Software can be a separate assembly layer Xde.Software. Then specific apps can
+	/// be extracted as Xde.Software.Kafka, etc.
 	/// TODO:This namespace is reponsible for existing software products definitions and
 	/// specifications. That can be useful for the integration purposes.
 	/// TODO: Initially simply collect software that can be of interested, then try to define
