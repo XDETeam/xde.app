@@ -2,7 +2,7 @@
   "profiles": {
     "Xde.Specs.CSharp": {
       "commandName": "Project",
-      "commandLineArgs": "webdav --test Hey"
+      "commandLineArgs": "host"
     }
   }
 }

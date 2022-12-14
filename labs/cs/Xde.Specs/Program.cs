@@ -1,10 +1,57 @@
 using System;
+using System.CommandLine.Builder;
+using System.CommandLine;
 using System.Reflection;
-using Xde.App;
+using Microsoft.Extensions.DependencyInjection;
+using System.CommandLine.Parsing;
+using System.Linq;
+using Xde.Specs;
+using Xde.Hosting;
 
-Console.WriteLine($"XDE Specs {Assembly.GetEntryAssembly().GetName().Version}");
+var meta = Assembly.GetEntryAssembly().GetName();
+Console.WriteLine($"{meta.Name} {meta.Version}");
 
-AppOptions.Process(args);
+//TODO:Try to put command hierarchy into DI
+IServiceCollection services = new ServiceCollection();
+
+//TODO: Scan and register commands
+services.AddSingleton<Command, HostCommand>();
+services.AddSingleton<HostCommand, HostCommand>();
+services.AddSingleton<Command, WebDavCommand>();
+services.AddSingleton<Command, SpecsCommand>();
+
+//TODO:Implement the same for arguments/options? Or commands will be responsible for this?
+
+var serviceProvider = services.BuildServiceProvider();
+var commands = serviceProvider
+	.GetServices<Command>()
+	.Where( command => !command.Parents.Any() )
+;
+
+var rootCommand = new RootCommand();
+foreach (var command in commands)
+{
+	rootCommand.AddCommand(command);
+}
+
+//TODO:How to force the second comand in "host ..."
+
+var parser = new CommandLineBuilder(rootCommand)
+	.UseDefaults()
+	//TODO:
+	//.UseHelp(ctx => ctx
+	//	.HelpBuilder
+	//	.CustomizeLayout(ConsoleExtensions.CustomHelpLayout)
+	//)
+	.Build()
+;
+
+return parser
+	.Parse(args)
+	.Invoke()
+;
+
+//TODO: AppOptions.Process(args);
 
 /*
  * - Есть раздел Security | Account
