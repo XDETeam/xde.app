@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xde.App.Views.Settings.MainPage"
+			 Title="{Binding Title}">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Color x:Key="Accent">#96d1ff</Color>
+			<Color x:Key="Cancel">#cccccc</Color>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
+		<ToolbarItem Text="Update" Command="{Binding UpdateCommand}" />
+	</ContentPage.ToolbarItems>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<ScrollView Grid.Row="1">
+			<StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+				<Entry Text="{Binding ConnectionString}" Keyboard="Default" Placeholder="DB connection string" />
+			</StackLayout>
+		</ScrollView>
+	</Grid>
+</ContentPage>

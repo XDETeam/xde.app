@@ -1,0 +1,36 @@
+#!markdown
+
+# Scanning for IoC samples
+
+#!csharp
+
+// #r "../../bin/Debug/net5.0/Xde.Specs.CSharp.dll"
+// using Xde.Forms.Code;
+
+// var test = Reflect.Assembly<ReflectionCache>();
+
+// test
+
+#!csharp
+
+public class Sample { }
+public class GenericDefintionSample<T> { }
+public class GenericSample : GenericDefintionSample<int> { }
+public static class StaticSample
+{
+	static StaticSample() {	}
+}
+
+var test1 = typeof(Sample)
+	.Assembly
+	.GetTypes()
+	.Select(type => new {
+		Name = type.Name,
+		Constructors = type.GetConstructor(Type.EmptyTypes) != null,
+		IsAbstract = type.IsAbstract,
+		IsGeneric = type.IsGenericType,
+		IsGenericDefintion = type.IsGenericTypeDefinition
+	})
+;
+
+test1
